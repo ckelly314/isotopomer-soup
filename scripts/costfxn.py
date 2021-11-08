@@ -47,30 +47,33 @@ def costfxn(
 
     """
 
-    t0 = measured_data.iloc[0]
-    t1 = measured_data.iloc[1]
-    try:
+    t0 = measured_data.iloc[0] # get adjusted_timepoint at timepoint 0
+    t1 = measured_data.iloc[1] # get adjusted_timepoint at timepoint 1
+    
+    try: # IF a timepoint 2 exists, get adjusted timepoint
         t2 = measured_data.iloc[2]
         indices = [
             int(t0["adjusted_timepoint"]),
             int(t1["adjusted_timepoint"]),
             int(t2["adjusted_timepoint"]),
-        ]
+        ] # we'll use the indices array to slice the model output numpy arrays
 
-    except IndexError:
+    except IndexError: # if a timepoint 2 does not exist, indices are just timepoints 0 & 1
         print("No t2 available from incubation data")
         indices = [int(t0["adjusted_timepoint"]), int(t1["adjusted_timepoint"])]
 
+    # compute difference of modeled and measured isotopomers at each timepoint
     error44 = modeled_44[indices] - np.array(measured_data[["44N2O"]])
     error45a = modeled_45a[indices] - np.array(measured_data[["45N2Oa"]])
     error45b = modeled_45b[indices] - np.array(measured_data[["45N2Ob"]])
     error46 = modeled_46[indices] - np.array(measured_data[["46N2O"]])
 
+    # condense error arrays into an RMSE and return array of RMSE's
     errors = np.array([rmse(error44), rmse(error45a), rmse(error45b), rmse(error46)])
 
-    if weights is None:
-        weights = np.array([1, 1, 1, 1])
+    if weights is None: # allow for weights to be an optional input
+        weights = np.array([1, 1, 1, 1]) # default is that weights are the same
 
-    cost = np.sum(weights * errors)
+    cost = np.sum(weights * errors) # cost is simply the sum of weights*errors
 
     return cost
