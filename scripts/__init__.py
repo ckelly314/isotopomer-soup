@@ -4,5 +4,5 @@
 from .binomial import binomial
 from .convert_af import convert_af
 from .convert_delta import convert_delta
-from .read_data import read_data
-from .read_data import get_experiment
+from .read_data import grid_data
+from .costfxn import costfxn
