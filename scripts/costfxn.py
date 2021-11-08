@@ -26,7 +26,6 @@ def costfxn(
     modeled_46=None,
     weights=None,
 ):
-
     """
     Compute differences between measured and modeled data at each incubation
     timepoint, for each isotopomer. Compute root mean squared error for each

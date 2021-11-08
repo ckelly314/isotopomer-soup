@@ -11,8 +11,8 @@ def convert_delta(concentration, d15N):
 
     """
     INPUTS:
-    d = delta value
-    i = isotope ("d15N" or "d18O") - to determine standard
+    concentration = concentration (needed to calculate atom fraction)
+    d = delta 15N
 
     OUTPUT:
     R = 15/14 ratio
