@@ -6,3 +6,4 @@ from .convert_af import convert_af
 from .convert_delta import convert_delta
 from .read_data import grid_data
 from .costfxn import costfxn
+from .plotmodeloutput import plot_outputs
