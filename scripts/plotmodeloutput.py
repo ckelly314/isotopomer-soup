@@ -26,12 +26,12 @@ def plot_interpolation(ax, x, y):
     )
 
 
-def plot_outputs(incubationdata=None, modeloutput=None, filename=None):
+def plot_outputs(trainingdata=None, modeloutput=None, filename=None):
     """
     Plot measured timepoints and model output for four N2O isotopocules.
 
     Inputs:
-    incubationdata = Pandas Dataframe output from read_data.grid_data
+    trainingdata = Pandas Dataframe output from read_data.grid_data
     modeloutput = Pandas Dataframe containing model output
     filename = filename (string) to use when saving figure
     """
@@ -45,8 +45,8 @@ def plot_outputs(incubationdata=None, modeloutput=None, filename=None):
         modeloutput["[N2O_44]_nM"],
         label="model output",
     )
-    x = incubationdata["Incubation_time_hrs"]
-    y = incubationdata["44N2O"]
+    x = trainingdata["Incubation_time_hrs"]
+    y = trainingdata["44N2O"]
     plot_interpolation(ax, x, y)
 
     ax.set_xlabel("Incubation time (hrs)")
@@ -60,8 +60,8 @@ def plot_outputs(incubationdata=None, modeloutput=None, filename=None):
         modeloutput["[N2O_46]_nM"],
         label="model output",
     )
-    x = incubationdata["Incubation_time_hrs"]
-    y = incubationdata["46N2O"]
+    x = trainingdata["Incubation_time_hrs"]
+    y = trainingdata["46N2O"]
     plot_interpolation(ax, x, y)
 
     ax.set_xlabel("Incubation time (hrs)")
@@ -74,8 +74,8 @@ def plot_outputs(incubationdata=None, modeloutput=None, filename=None):
         modeloutput["[N2O_45a]_nM"],
         label="model output",
     )
-    x = incubationdata["Incubation_time_hrs"]
-    y = incubationdata["45N2Oa"]
+    x = trainingdata["Incubation_time_hrs"]
+    y = trainingdata["45N2Oa"]
     plot_interpolation(ax, x, y)
 
     ax.set_xlabel("Incubation time (hrs)")
@@ -88,8 +88,8 @@ def plot_outputs(incubationdata=None, modeloutput=None, filename=None):
         modeloutput["[N2O_45b]_nM"],
         label="model output",
     )
-    x = incubationdata["Incubation_time_hrs"]
-    y = incubationdata["45N2Ob"]
+    x = trainingdata["Incubation_time_hrs"]
+    y = trainingdata["45N2Ob"]
     plot_interpolation(ax, x, y)
 
     ax.set_xlabel("Incubation time (hrs)")

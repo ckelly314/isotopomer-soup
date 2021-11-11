@@ -64,15 +64,15 @@ def grid_data(filename=None, station=None, feature=None, tracer=None, T=None):
 
     gridded_data = experiment
 
-    gridded_data["x"] = (
+    gridded_data["x"] = (  # time(timepoints) = time(hrs) * (1 day/24 hrs) * (T timepoints/day)
         gridded_data.Incubation_time_hrs / 24 * T
-    )  # time(timepoints) = time(hrs) * (1 day/24 hrs) * (T timepoints/day)
-    gridded_data["timepoint"] = round(
+    )
+    gridded_data["timepoint"] = round(  # round timepoints to nearest integer to match w/ model output
         gridded_data.x, 0
-    )  # round timepoints to nearest integer to match w/ model output
-    gridded_data["adjusted_timepoint"] = (
+    )
+    gridded_data["adjusted_timepoint"] = (   # "slide" data to the left to match model output
         gridded_data["timepoint"] - gridded_data["timepoint"][0]
-    )  # "slide" data to the left to match model output
+    )
 
     return gridded_data
 
