@@ -7,6 +7,8 @@ from .convert_delta import convert_delta
 from .read_data import get_experiment
 from .read_data import grid_data
 from .costfxn import costfxn
+from .kestimates import kestimate, kestimates
 from .plotmodeloutput import plot_outputs
 from .initialization.initialize_n2o import initialize_n2o
 from .initialization.isotope_effects import IsotopeEffects
+from .initialization.bgc import BioGeoChemistry

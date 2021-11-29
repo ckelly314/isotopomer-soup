@@ -16,14 +16,28 @@ def read_data(filename):
 def get_experiment(data=None, station=None, feature=None, tracer=None):
     """
     Select data, compute timepoint means, and remove extra columns.
+
+    Inputs:
+    data = Pandas DataFrame object containing isotopomer data from all incubations
+    station = "PS1", "PS2", or "PS3"
+    feature = "Surface", "PNM","Top of oxycline", "Mid-oxycline", "Interface",
+        "SCM", "SNM", "Deep ODZ core", "Base of ODZ", or "Deep oxycline"
+    tracer: "NH4+", "NO2-", or "NO3-"
+
+    Outputs:
+    timepoints = Pandas DataFrame object containing average isotopomer concentrations
+        at each timepoint from desired isotopomer incubation
     """
 
+    # N2O isotopomer incubation data from desired station, feature, and tracer
     trainingdata = data[
         (data.Station == station) & (data.Feature == feature) & (data.Tracer == tracer)
     ]
 
+    # compute average isotopomer concentrations at each timepoints
     timepoints = trainingdata.groupby("Incubation_time_hrs").mean().reset_index()
 
+    # remove unused columns
     timepoints = timepoints[
         ["Incubation_time_hrs", "44N2O", "45N2Oa", "45N2Ob", "46N2O"]
     ]
@@ -33,6 +47,8 @@ def get_experiment(data=None, station=None, feature=None, tracer=None):
 
 def grid_data(filename=None, station=None, feature=None, tracer=None, T=None):
     """
+    Used in costfxn.py
+
     Obtain 44N2O, 45N2Oa, 45N2Ob, and 46N2O data from desired incubation at each
     of 2-3 timepoints (some experiments did not have data from all three timepoints
     post-QC). Compute integer timepoints from incubation time in hours. Add an
