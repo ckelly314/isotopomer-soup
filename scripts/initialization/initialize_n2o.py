@@ -6,7 +6,7 @@ Initialize concentrations of N2O isotopomers based on experimental t0.
 """
 
 import pandas as pd
-import sys
+
 
 def initialize_n2o(trainingdata=None):
     """

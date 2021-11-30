@@ -9,11 +9,11 @@ import pandas as pd
 from scipy import stats
 from collections import namedtuple
 
-from .read_data import get_experiment # script for averaging isotopomers
-from .initialization.bgc import BioGeoChemistry # intialization script
+from .. import get_experiment # script for averaging isotopomers
+from .. import BioGeoChemistry # initialization script
+
 
 bgc = BioGeoChemistry() # get concentrations of substrates, spikes, and carriers
-
 
 def kestimate(inputdata = None, station=None, feature=None, tracer=None, hybrid=False):
     """
@@ -111,9 +111,3 @@ def kestimates(inputdata = None, station=None, feature=None, hybridtracer=None):
     khybrid = kestimate(inputdata=inputdata, station=station, feature=feature, tracer=hybridtracer, hybrid=True)
 
     return [knh4, kno2, kno3, khybrid]
-
-if __name__=="__main__":
-    data = pd.read_csv("../../isotopomer-soup/00_incubationdata.csv")
-    print(
-        kestimates(inputdata = data, station="PS2", feature="SCM", hybridtracer="NO2-")
-        )
