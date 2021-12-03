@@ -33,7 +33,7 @@ def costfxn(
 
     Inputs:
     trainingdata = Pandas Dataframe output from read_data.grid_data
-    modeled_44 = numpy array of modeled 44N2O with dimensions (T, 1), where T 
+    modeled_44 = numpy array of modeled 44N2O with dimensions (T, 1), where T
     is the number of model timepoints.
     modeled_45a = modeled 45N2Oa
     modeled_45b = modeled 45N2Ob
@@ -46,18 +46,18 @@ def costfxn(
 
     """
 
-    t0 = trainingdata.iloc[0] # get adjusted_timepoint at timepoint 0
-    t1 = trainingdata.iloc[1] # get adjusted_timepoint at timepoint 1
-    
-    try: # IF a timepoint 2 exists, get adjusted timepoint
+    t0 = trainingdata.iloc[0]  # get adjusted_timepoint at timepoint 0
+    t1 = trainingdata.iloc[1]  # get adjusted_timepoint at timepoint 1
+
+    try:  # IF a timepoint 2 exists, get adjusted timepoint
         t2 = trainingdata.iloc[2]
         indices = [
             int(t0["adjusted_timepoint"]),
             int(t1["adjusted_timepoint"]),
             int(t2["adjusted_timepoint"]),
-        ] # we'll use the indices array to slice the model output numpy arrays
+        ]  # we'll use the indices array to slice the model output numpy arrays
 
-    except IndexError: # if a timepoint 2 does not exist, indices are just timepoints 0 & 1
+    except IndexError:  # if a timepoint 2 does not exist, indices are just timepoints 0 & 1
         print("No t2 available from incubation data")
         indices = [int(t0["adjusted_timepoint"]), int(t1["adjusted_timepoint"])]
 
@@ -70,9 +70,9 @@ def costfxn(
     # condense error arrays into an RMSE and return array of RMSE's
     errors = np.array([rmse(error44), rmse(error45a), rmse(error45b), rmse(error46)])
 
-    if weights is None: # allow for weights to be an optional input
-        weights = np.array([1, 1, 1, 1]) # default is that weights are all equal to 1
+    if weights is None:  # allow for weights to be an optional input
+        weights = np.array([1, 1, 1, 1])  # default is that weights are all equal to 1
 
-    cost = np.sum(weights * errors) # cost is simply the sum of weights*errors
+    cost = np.sum(weights * errors)  # cost is simply the sum of weights*errors
 
     return cost

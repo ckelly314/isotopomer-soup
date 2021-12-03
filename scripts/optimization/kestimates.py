@@ -9,10 +9,12 @@ import pandas as pd
 from scipy import stats
 from collections import namedtuple
 
-from .. import get_experiment # script for averaging isotopomers
+from .. import get_experiment  # script for averaging isotopomers
 
 
-def kestimate(bgc, inputdata = None, station=None, feature=None, tracer=None, hybrid=False):
+def kestimate(
+    bgc, inputdata=None, station=None, feature=None, tracer=None, hybrid=False
+):
     """
     Estimate a second-order rate constant for N2O production from a given substrate.
 
@@ -29,52 +31,69 @@ def kestimate(bgc, inputdata = None, station=None, feature=None, tracer=None, hy
     Outputs:
     k = estimated second-order rate constant (units are /nM/day)
     """
-    
-    try: # add Try and Except to handle instances where I forget to specify required kwargs
-        data = get_experiment( # obtain average isotopomer concentrations at each timepoint
-            data=inputdata,
-            station=station,
-            feature=feature,
-            tracer=tracer
-            )
 
-        data['Incubation_time_days'] = data.Incubation_time_hrs/24. # needed to estimate rate in terms of nM/day
+    try:  # add Try and Except to handle instances where I forget to specify required kwargs
+        data = get_experiment(  # obtain average isotopomer concentrations at each timepoint
+            data=inputdata, station=station, feature=feature, tracer=tracer
+        )
+
+        data["Incubation_time_days"] = (
+            data.Incubation_time_hrs / 24.0
+        )  # needed to estimate rate in terms of nM/day
 
         # use linear regression through 46N2O timepoints to estimate production of 46N2O in nM/day
         # if the rate is negative, set it to 0
-        p46 = max(0,stats.linregress(data.Incubation_time_days, data['46N2O']).slope)
+        p46 = max(0, stats.linregress(data.Incubation_time_days, data["46N2O"]).slope)
 
         # store key parameters for estimating k in a named tuple for access with dot notation
-        substrate = namedtuple('substrate', ['AFsquared','substrate_squared']) 
+        substrate = namedtuple("substrate", ["AFsquared", "substrate_squared"])
 
         # define atom fraction for natural abundance 15R/14R
-        na = 0.00367647/(1+0.00367647)
+        na = 0.00367647 / (1 + 0.00367647)
 
         # combine named tuples for each substrate into a dict for access during calculations
-        if hybrid==False:
+        if hybrid == False:
             substratedict = {
-                'NH4+':substrate(AFsquared=(bgc.NH4_spike/(bgc.NH4_ambient + bgc.NH4_spike))**2, 
-                        substrate_squared=(bgc.NH4_ambient + bgc.NH4_spike)**2),
-                'NO2-':substrate(AFsquared=(bgc.NO2_spike/(bgc.NO2_ambient + bgc.NO2_spike))**2, 
-                        substrate_squared=(bgc.NO2_ambient + bgc.NO2_spike)**2),
-                'NO3-':substrate(AFsquared=(bgc.NO3_spike/(bgc.NO3_ambient + bgc.NO3_spike))**2, 
-                        substrate_squared=(bgc.NO3_ambient + bgc.NO3_spike)**2)
-                }
+                "NH4+": substrate(
+                    AFsquared=(bgc.NH4_spike / (bgc.NH4_ambient + bgc.NH4_spike)) ** 2,
+                    substrate_squared=(bgc.NH4_ambient + bgc.NH4_spike) ** 2,
+                ),
+                "NO2-": substrate(
+                    AFsquared=(bgc.NO2_spike / (bgc.NO2_ambient + bgc.NO2_spike)) ** 2,
+                    substrate_squared=(bgc.NO2_ambient + bgc.NO2_spike) ** 2,
+                ),
+                "NO3-": substrate(
+                    AFsquared=(bgc.NO3_spike / (bgc.NO3_ambient + bgc.NO3_spike)) ** 2,
+                    substrate_squared=(bgc.NO3_ambient + bgc.NO3_spike) ** 2,
+                ),
+            }
 
-        elif hybrid==True: # calculation of second-order rate constant is slightly different for hybrid process
+        elif (
+            hybrid == True
+        ):  # calculation of second-order rate constant is slightly different for hybrid process
             substratedict = {
-                'NH4+':substrate(AFsquared=(bgc.NH4_spike/(bgc.NH4_ambient + bgc.NH4_spike)), # approximate the probability of forming 46N2O
-                        substrate_squared=(bgc.NH4_ambient + bgc.NH4_spike)*(bgc.NO2_ambient + bgc.NO2_carrier)),
-                'NO2-':substrate(AFsquared=(bgc.NO2_spike/(bgc.NO2_ambient + bgc.NO2_spike)), 
-                        substrate_squared=(bgc.NH4_ambient + bgc.NH4_carrier)*(bgc.NO2_ambient + bgc.NO2_carrier))
-                }
+                "NH4+": substrate(
+                    AFsquared=(
+                        bgc.NH4_spike / (bgc.NH4_ambient + bgc.NH4_spike)
+                    ),  # approximate the probability of forming 46N2O
+                    substrate_squared=(bgc.NH4_ambient + bgc.NH4_spike)
+                    * (bgc.NO2_ambient + bgc.NO2_carrier),
+                ),
+                "NO2-": substrate(
+                    AFsquared=(bgc.NO2_spike / (bgc.NO2_ambient + bgc.NO2_spike)),
+                    substrate_squared=(bgc.NH4_ambient + bgc.NH4_carrier)
+                    * (bgc.NO2_ambient + bgc.NO2_carrier),
+                ),
+            }
 
         # prdxn of N2O, nM/day, estimated by dividing production of 46N2O by binomial probability of producing 46N2O
-        pN2O = p46/substratedict[tracer].AFsquared
+        pN2O = p46 / substratedict[tracer].AFsquared
 
-        k = pN2O/substratedict[tracer].substrate_squared # 2nd order rate constant, 1/(nM*day)
+        k = (
+            pN2O / substratedict[tracer].substrate_squared
+        )  # 2nd order rate constant, 1/(nM*day)
 
-    except AttributeError: # reminders to myself
+    except AttributeError:  # reminders to myself
         if inputdata is None:
             print("Please specify input data!")
         if station is None:
@@ -83,15 +102,16 @@ def kestimate(bgc, inputdata = None, station=None, feature=None, tracer=None, hy
             print("Please specify feature!")
         if tracer is None:
             print("Please specify tracer!")
-        
+
         k = "Unable to calculate k"
 
     return k
 
-def kestimates(bgc, inputdata = None, station=None, feature=None, hybridtracer=None):
+
+def kestimates(bgc, inputdata=None, station=None, feature=None, hybridtracer=None):
     """
     Return estimated second-order rate constants from the suite of tracer experiments
-    at a given station and depth/feature. 
+    at a given station and depth/feature.
 
     Inputs:
     bgc = BioGeoChemistry object, output from bgc.py
@@ -107,9 +127,22 @@ def kestimates(bgc, inputdata = None, station=None, feature=None, hybridtracer=N
         from NH4+, NO2-, NO3-, and a hybrid process combining NH4+ and NO2-
     """
 
-    knh4 = kestimate(bgc, inputdata=inputdata, station=station, feature=feature, tracer="NH4+")
-    kno2 = kestimate(bgc, inputdata=inputdata, station=station, feature=feature, tracer="NO2-")
-    kno3 = kestimate(bgc, inputdata=inputdata, station=station, feature=feature, tracer="NO3-")
-    khybrid = kestimate(bgc, inputdata=inputdata, station=station, feature=feature, tracer=hybridtracer, hybrid=True)
+    knh4 = kestimate(
+        bgc, inputdata=inputdata, station=station, feature=feature, tracer="NH4+"
+    )
+    kno2 = kestimate(
+        bgc, inputdata=inputdata, station=station, feature=feature, tracer="NO2-"
+    )
+    kno3 = kestimate(
+        bgc, inputdata=inputdata, station=station, feature=feature, tracer="NO3-"
+    )
+    khybrid = kestimate(
+        bgc,
+        inputdata=inputdata,
+        station=station,
+        feature=feature,
+        tracer=hybridtracer,
+        hybrid=True,
+    )
 
     return [knh4, kno2, kno3, khybrid]

@@ -20,7 +20,9 @@ def plot_interpolation(ax, x, y):
     ax.plot(x, y, "bo", label="measured timepoints")  # plot measured timepoints
     ax.plot(
         x_fine,
-        interp.interp1d(x, y, kind="quadratic")(x_fine), # perform 1-D interpolation in-line with plotting
+        interp.interp1d(x, y, kind="quadratic")(
+            x_fine
+        ),  # perform 1-D interpolation in-line with plotting
         zorder=0,
         label="quadratic interpolation",
     )
