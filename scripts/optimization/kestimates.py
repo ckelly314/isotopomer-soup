@@ -10,16 +10,14 @@ from scipy import stats
 from collections import namedtuple
 
 from .. import get_experiment # script for averaging isotopomers
-from .. import BioGeoChemistry # initialization script
 
 
-bgc = BioGeoChemistry() # get concentrations of substrates, spikes, and carriers
-
-def kestimate(inputdata = None, station=None, feature=None, tracer=None, hybrid=False):
+def kestimate(bgc, inputdata = None, station=None, feature=None, tracer=None, hybrid=False):
     """
     Estimate a second-order rate constant for N2O production from a given substrate.
 
     Inputs:
+    bgc = BioGeoChemistry object, output from bgc.py
     inputdata = Pandas DataFrame object containing isotopomer data from all incubations
     station = "PS1", "PS2", or "PS3"
     feature = "Surface", "PNM","Top of oxycline", "Mid-oxycline", "Interface",
@@ -31,7 +29,7 @@ def kestimate(inputdata = None, station=None, feature=None, tracer=None, hybrid=
     Outputs:
     k = estimated second-order rate constant (units are /nM/day)
     """
-
+    
     try: # add Try and Except to handle instances where I forget to specify required kwargs
         data = get_experiment( # obtain average isotopomer concentrations at each timepoint
             data=inputdata,
@@ -49,6 +47,9 @@ def kestimate(inputdata = None, station=None, feature=None, tracer=None, hybrid=
         # store key parameters for estimating k in a named tuple for access with dot notation
         substrate = namedtuple('substrate', ['AFsquared','substrate_squared']) 
 
+        # define atom fraction for natural abundance 15R/14R
+        na = 0.00367647/(1+0.00367647)
+
         # combine named tuples for each substrate into a dict for access during calculations
         if hybrid==False:
             substratedict = {
@@ -62,9 +63,9 @@ def kestimate(inputdata = None, station=None, feature=None, tracer=None, hybrid=
 
         elif hybrid==True: # calculation of second-order rate constant is slightly different for hybrid process
             substratedict = {
-                'NH4+':substrate(AFsquared=(bgc.NH4_spike/(bgc.NH4_ambient + bgc.NH4_spike))**2, 
+                'NH4+':substrate(AFsquared=(bgc.NH4_spike/(bgc.NH4_ambient + bgc.NH4_spike)), # approximate the probability of forming 46N2O
                         substrate_squared=(bgc.NH4_ambient + bgc.NH4_spike)*(bgc.NO2_ambient + bgc.NO2_carrier)),
-                'NO2-':substrate(AFsquared=(bgc.NO2_spike/(bgc.NO2_ambient + bgc.NO2_spike))**2, 
+                'NO2-':substrate(AFsquared=(bgc.NO2_spike/(bgc.NO2_ambient + bgc.NO2_spike)), 
                         substrate_squared=(bgc.NH4_ambient + bgc.NH4_carrier)*(bgc.NO2_ambient + bgc.NO2_carrier))
                 }
 
@@ -87,12 +88,13 @@ def kestimate(inputdata = None, station=None, feature=None, tracer=None, hybrid=
 
     return k
 
-def kestimates(inputdata = None, station=None, feature=None, hybridtracer=None):
+def kestimates(bgc, inputdata = None, station=None, feature=None, hybridtracer=None):
     """
     Return estimated second-order rate constants from the suite of tracer experiments
     at a given station and depth/feature. 
 
     Inputs:
+    bgc = BioGeoChemistry object, output from bgc.py
     inputdata = Pandas DataFrame object containing isotopomer data from all incubations
     station = "PS1", "PS2", or "PS3"
     feature = "Surface", "PNM","Top of oxycline", "Mid-oxycline", "Interface",
@@ -105,9 +107,9 @@ def kestimates(inputdata = None, station=None, feature=None, hybridtracer=None):
         from NH4+, NO2-, NO3-, and a hybrid process combining NH4+ and NO2-
     """
 
-    knh4 = kestimate(inputdata=inputdata, station=station, feature=feature, tracer="NH4+")
-    kno2 = kestimate(inputdata=inputdata, station=station, feature=feature, tracer="NO2-")
-    kno3 = kestimate(inputdata=inputdata, station=station, feature=feature, tracer="NO3-")
-    khybrid = kestimate(inputdata=inputdata, station=station, feature=feature, tracer=hybridtracer, hybrid=True)
+    knh4 = kestimate(bgc, inputdata=inputdata, station=station, feature=feature, tracer="NH4+")
+    kno2 = kestimate(bgc, inputdata=inputdata, station=station, feature=feature, tracer="NO2-")
+    kno3 = kestimate(bgc, inputdata=inputdata, station=station, feature=feature, tracer="NO3-")
+    khybrid = kestimate(bgc, inputdata=inputdata, station=station, feature=feature, tracer=hybridtracer, hybrid=True)
 
     return [knh4, kno2, kno3, khybrid]

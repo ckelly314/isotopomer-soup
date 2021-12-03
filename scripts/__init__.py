@@ -5,12 +5,13 @@ from .functions.binomial import binomial
 from .functions.convert_af import convert_af
 from .functions.convert_delta import convert_delta
 
-from .initialization.read_data import get_experiment
-from .initialization.read_data import grid_data
+from .preprocessing.read_data import get_experiment
+from .preprocessing.read_data import grid_data
 
 from .initialization.initialize_n2o import initialize_n2o
 from .initialization.isotope_effects import IsotopeEffects
 from .initialization.bgc import BioGeoChemistry
+from .initialization.modelparams import modelparams
 
 from .optimization.costfxn import costfxn
 from .optimization.kestimates import kestimate, kestimates

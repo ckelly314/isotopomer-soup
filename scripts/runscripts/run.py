@@ -7,11 +7,9 @@ from .datapath import datapath
 from .. import *
 
 def run():
-
-	data = pd.read_csv(f"{datapath()}00_incubationdata.csv")
-	x = kestimates(inputdata = data, station="PS2", feature="SCM", hybridtracer="NO2-")
 	
 	### READ IN TRAINING DATA ###
+	data = pd.read_csv(f"{datapath()}00_incubationdata.csv")
 	PS2SCM15NO2 = grid_data(filename=f'{datapath()}00_incubationdata.csv',
                           station="PS2", feature="SCM", tracer="NO2-", 
                           T=1000)
@@ -19,5 +17,9 @@ def run():
 
 	### ISOTOPE EFFECTS ###
 	isos = IsotopeEffects()
+
+	bgc = BioGeoChemistry()
+	
+	x = kestimates(bgc, inputdata = data, station="PS2", feature="SCM", hybridtracer="NO2-")
 	
 	print(x)
