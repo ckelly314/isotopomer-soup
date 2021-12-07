@@ -12,6 +12,7 @@ from .initialization.initialize_n2o import initialize_n2o
 from .initialization.isotope_effects import IsotopeEffects
 from .initialization.bgc import BioGeoChemistry
 from .initialization.modelparams import modelparams
+from .initialization.tracers import Tracers
 
 from .optimization.costfxn import costfxn
 from .optimization.kestimates import kestimate, kestimates
