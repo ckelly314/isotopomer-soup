@@ -18,6 +18,7 @@ from .optimization.costfxn import costfxn
 from .optimization.kestimates import kestimate, kestimates
 
 from .postprocessing.plotmodeloutput import plot_outputs
+from .postprocessing.postprocess import postprocess
 
 from .runscripts.datapath import datapath
 from .runscripts.run import run

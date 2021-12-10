@@ -160,6 +160,10 @@ class BioGeoChemistry:
 
         ### SUBSTRATE EXCHANGE ###
 
+        #source: Martin & Casciotti (2016), "Nitrogen and oxygen isotopic fractionation during microbial nitrite reduction"
+        self.kNO2TONO = 41.760 # /day, Cu-NIR, heterotrophic denitrifying bacteria
+        #self.kNO2TONO = 28.80 # /day, Fe-NIR, heterotrophic denitrifying bacteria
+
         try:
             self.kNH4TONO2 = data.kNH4TONO2 / (
                 self.NH4_ambient + self.NH4_spike
@@ -174,7 +178,7 @@ class BioGeoChemistry:
 
         ### N2O CONSUMPTION ###
 
-        self.kN2OCONS = data.kN2OCONS  # /day
+        self.kN2OCONS = data.kN2OCONS  # /day, source: Sun et al. (2020), "Microbial N2O consumption in and above marine N2O production hotspots"
 
     def __repr__(self):
 
