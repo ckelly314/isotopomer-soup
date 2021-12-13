@@ -91,8 +91,6 @@ def kestimate(
                 "NO2-": substrate(
                     probability= afno2*(1-na) + (1-afno2)*na,
                     concentration=(bgc.NH4_ambient + bgc.NH4_carrier)* (bgc.NO2_ambient + bgc.NO2_spike)
-                    #(bgc.NH4_ambient + bgc.NH4_carrier)
-                    #* (bgc.NO2_ambient + bgc.NO2_carrier),
                 ),
             }
 
