@@ -161,8 +161,15 @@ class BioGeoChemistry:
         ### SUBSTRATE EXCHANGE ###
 
         #source: Martin & Casciotti (2016), "Nitrogen and oxygen isotopic fractionation during microbial nitrite reduction"
-        self.kNO2TONO = 41.760 # /day, Cu-NIR, heterotrophic denitrifying bacteria
+        #self.kNO2TONO = 41.760 # /day, Cu-NIR, heterotrophic denitrifying bacteria
         #self.kNO2TONO = 28.80 # /day, Fe-NIR, heterotrophic denitrifying bacteria
+        
+        # source: Ward et al. (2009), "Denitrification as the dominant nitrogen loss process in the Arabian Sea"
+        #self.kNO2TONO = 0.00016 # /day, minimum
+        self.kNO2TONO = 0.017 # /day, maximum
+
+        # source: Bulow et al. (2010), "Denitrification exceeds anammox... "
+        #self.kNO2TONO = 0.0028 # /day, average value
 
         try:
             self.kNH4TONO2 = data.kNH4TONO2 / (

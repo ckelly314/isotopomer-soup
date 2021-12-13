@@ -149,7 +149,7 @@ def postprocess(bgc, isos, tracers, x, model):
         output["NOTONO2"] = kAOA*tracers.no_14 + kAOA/isos.alpha15NH4TONO2AOA*tracers.no_15
         output["NO2TONO"] = bgc.kNO2TONO*tracers.no2_14 + bgc.kNO2TONO/isos.alpha15NO2TONO*tracers.no2_15
 
-        [knitrification, kdenitno2, kdenitno3, khybrid1, khybrid2] = x
+        [knitrification, kdenitno, kdenitno3, khybrid1, khybrid2] = x
 
         output['nitrification'] = knitrification*((tracers.nh4_14+tracers.nh4_15)**2)
         output['denitno'] = kdenitno*((tracers.no_14+tracers.no_15)**2)
