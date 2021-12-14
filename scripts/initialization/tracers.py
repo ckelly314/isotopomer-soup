@@ -22,6 +22,9 @@ class Tracers:
             trainingdata=trainingdata
         )
 
+        # define atom fraction for natural abundance 15R/14R
+        na = 0.00367647 / (1 + 0.00367647)
+
         # initialize arrays of state variables
         # specify dtype to prevent overflow errors
         self.n2o_44 = np.zeros(shape=(T, 1), dtype='float64')
@@ -86,8 +89,8 @@ class Tracers:
         self.afno2[0, :] = bgc.AFNO2_init
         self.afno3[0, :] = bgc.AFNO3_init
 
-        self.afnh2oh[0, :] = 0
-        self.afno[0, :] = 0
+        self.afnh2oh[0, :] = na
+        self.afno[0, :] = na
 
     def __repr__(self):
         return "state variable arrays initialized!"
