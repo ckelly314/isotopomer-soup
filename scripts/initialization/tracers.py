@@ -68,11 +68,11 @@ class Tracers:
         self.nh4_14[0, :] = bgc.nh4_14_i
         self.nh4_15[0, :] = bgc.nh4_15_i
 
-        self.nh2oh_14[0, :] = 0
-        self.nh2oh_15[0, :] = 0
+        self.nh2oh_14[0, :] = 0.01*(1-na) # arbitrary starting concentration of 0.01 nM
+        self.nh2oh_15[0, :] = 0.01*na
 
-        self.no_14[0, :] = 0
-        self.no_15[0, :] = 0
+        self.no_14[0, :] = 0.01*(1-na) # arbitrary starting concentration of 0.01 nM
+        self.no_15[0, :] = 0.01*na
 
         self.no2_14[0, :] = bgc.no2_14_i
         self.no2_15[0, :] = bgc.no2_15_i
