@@ -58,7 +58,7 @@ def costfxn(
         ]  # we'll use the indices array to slice the model output numpy arrays
 
     except IndexError:  # if a timepoint 2 does not exist, indices are just timepoints 0 & 1
-        print("No t2 available from incubation data")
+        #print("No t2 available from incubation data") # this print statement might be helpful but gets annoying
         indices = [int(t0["adjusted_timepoint"]), int(t1["adjusted_timepoint"])]
 
     # compute difference of modeled and measured isotopomers at each timepoint

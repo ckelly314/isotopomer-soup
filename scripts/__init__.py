@@ -14,12 +14,17 @@ from .initialization.bgc import BioGeoChemistry
 from .initialization.modelparams import modelparams
 from .initialization.tracers import Tracers
 
+from .model.modelv1 import modelv1
+from .model.modelv2 import modelv2
+from .model.modelv3 import modelv3
+
+from .runscripts.datapath import datapath
+
 from .optimization.costfxn import costfxn
-from .optimization.kestimates import kestimate, kestimates
+from .optimization.initialguess import x0
 
 from .postprocessing.plotmodeloutput import plot_outputs
 from .postprocessing.plotmodeloutput2 import scatter_plot
 from .postprocessing.postprocess import postprocess
 
-from .runscripts.datapath import datapath
 from .runscripts.run import run
