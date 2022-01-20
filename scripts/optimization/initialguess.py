@@ -38,7 +38,7 @@ def x0(station=None, feature=None, key=None):
 
     # isotope effects and model params are the same for all tracers
     isos = IsotopeEffects()
-    (dt, T, times) = modelparams()
+    (dt, nT, times) = modelparams()
     path_to_file = datapath()
 
     ### 1. estimate k for N2O production from NH4+ ###
@@ -50,13 +50,13 @@ def x0(station=None, feature=None, key=None):
         station=station,
         feature=feature,
         tracer="NH4+",
-        T=1000,
+        T=nT,
     )
 
     # run model for 15NH4+ experiment
     bgc = BioGeoChemistry(key, tracer="NH4+")
-    tr = Tracers(bgc, data)
-    tracers = modelv3(x, bgc, isos, tr, (dt, T, times))
+    tr = Tracers(nT, bgc, data)
+    tracers = modelv3(x, bgc, isos, tr, (dt, nT, times))
 
     # calculations
     data["Incubation_time_days"] = (
@@ -86,13 +86,13 @@ def x0(station=None, feature=None, key=None):
         station=station,
         feature=feature,
         tracer="NO3-",
-        T=1000,
+        T=nT,
     )
 
     # run model for 15NH4+ experiment
     bgc = BioGeoChemistry(key, tracer="NO3-")
-    tr = Tracers(bgc, data)
-    tracers = modelv3(x, bgc, isos, tr, (dt, T, times))
+    tr = Tracers(nT, bgc, data)
+    tracers = modelv3(x, bgc, isos, tr, (dt,nT, times))
 
     # calculations
     data["Incubation_time_days"] = (
@@ -122,13 +122,13 @@ def x0(station=None, feature=None, key=None):
         station=station,
         feature=feature,
         tracer="NO2-",
-        T=1000,
+        T=nT,
     )
 
     # run model for 15NH4+ experiment
     bgc = BioGeoChemistry(key, tracer="NO2-")
-    tr = Tracers(bgc, data)
-    tracers = modelv3(x, bgc, isos, tr, (dt, T, times))
+    tr = Tracers(nT, bgc, data)
+    tracers = modelv3(x, bgc, isos, tr, (dt,nT, times))
 
     # calculations
     data["Incubation_time_days"] = (

@@ -7,26 +7,31 @@ from .. import *
 
 def run():
 
-    ### READ IN TRAINING DATA ###
-    data = pd.read_csv(f"{datapath()}00_incubationdata.csv")
-    PS2SCM15NO2 = grid_data(
-        filename=f"{datapath()}00_incubationdata.csv",
-        station="PS2",
-        feature="SCM",
-        tracer="NO2-",
-        T=1000,
-    )
-    N2O44_init, N2O45a_init, N2O45b_init, N2O46_init = initialize_n2o(
-        trainingdata=PS2SCM15NO2
-    )
+    stn = "PS2"
+    ft = "Interface"
+    t = "NO2-"
+    bgckey = stn+ft
+
+    ### INITIALIZATION ###
+
+    # training data
+    path_to_data = datapath()
+    filename = '00_incubationdata.csv'
+
+    gridded_data = grid_data(filename=f'{path_to_data}{filename}',
+                              station=stn, feature=ft, tracer=t, 
+                              T=1000)
+
+    ### SUBSTRATE CONCENTRATIONS AND RATES OF EXCHANGE ###
+    bgc = BioGeoChemistry(bgckey, tracer=t)
 
     ### ISOTOPE EFFECTS ###
     isos = IsotopeEffects()
 
-    bgc = BioGeoChemistry()
+    ### STATE VARIABLES ###
+    tr = Tracers(bgc, gridded_data) 
 
-    x = kestimates(
-        bgc, inputdata=data, station="PS2", feature="SCM", hybridtracer="NO2-"
-    )
+    ### MODEL PARAMS ###
+    params = modelparams()
 
-    print(x)
+    print("test complete")

@@ -12,11 +12,11 @@ from .initialize_n2o import initialize_n2o
 
 class Tracers:
 
-    def __init__(self, bgc, trainingdata):
+    def __init__(self, T, bgc, trainingdata):
 
         ### INITIALIZE STATE VARIABLES ###
 
-        T = 1000
+        #T = 1000
 
         N2O44_init, N2O45a_init, N2O45b_init, N2O46_init = initialize_n2o(
             trainingdata=trainingdata
@@ -68,11 +68,11 @@ class Tracers:
         self.nh4_14[0, :] = bgc.nh4_14_i
         self.nh4_15[0, :] = bgc.nh4_15_i
 
-        self.nh2oh_14[0, :] = 0.01*(1-na) # arbitrary starting concentration of 0.01 nM
-        self.nh2oh_15[0, :] = 0.01*na
+        self.nh2oh_14[0, :] = 10*(1-na) # arbitrary starting concentration of 10 nM
+        self.nh2oh_15[0, :] = 10*na
 
-        self.no_14[0, :] = 0.01*(1-na) # arbitrary starting concentration of 0.01 nM
-        self.no_15[0, :] = 0.01*na
+        self.no_14[0, :] = 10*(1-na) # arbitrary starting concentration of 10 nM
+        self.no_15[0, :] = 10*na
 
         self.no2_14[0, :] = bgc.no2_14_i
         self.no2_15[0, :] = bgc.no2_15_i

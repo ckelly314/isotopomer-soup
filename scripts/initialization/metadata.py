@@ -56,8 +56,8 @@ def metadata(key):
         NO3_ambient=0.10 * 1000,  # nmol/L
         d15NO2_ambient=0.0,  # per mil, NO PS1 DATA
         d15NO3_ambient=4.27,  # per mil
-        kNH4TONO2=0.0,  # nmol/L/day
-        kNO2TONO3=None,  # nmol/L/day
+        kNH4TONO2=None,  # nmol/L/day
+        kNO2TONO3=0.0,  # nmol/L/day
         kNO3TONO2=None,  # nmol/L/day
         kN2OCONS=0.079,  # /day
     )
@@ -74,7 +74,7 @@ def metadata(key):
         d15NO3_ambient=4.44,  # per mil
         kNH4TONO2=None,  # nmol/L/day
         kNO2TONO3=77.79,  # nmol/L/day
-        kNO3TONO2=0.083,  # nmol/L/day
+        kNO3TONO2=0.0,  # nmol/L/day
         kN2OCONS=0.024,  # /day
     )
 
@@ -88,7 +88,7 @@ def metadata(key):
         NO3_ambient=8.35 * 1000,  # nmol/L
         d15NO2_ambient=0.0,  # per mil, NO PS1 DATA
         d15NO3_ambient=11.43,  # per mil
-        kNH4TONO2=0.194,  # nmol/L/day
+        kNH4TONO2=0.519953713,  # nmol/L/day
         kNO2TONO3=0.0,  # nmol/L/day
         kNO3TONO2=0.0,  # nmol/L/day
         kN2OCONS=0.024,  # /day
@@ -104,8 +104,8 @@ def metadata(key):
         NO3_ambient=28.29 * 1000,  # nmol/L
         d15NO2_ambient=0.0,  # per mil, NO PS1 DATA
         d15NO3_ambient=7.73,  # per mil
-        kNH4TONO2=0.515,  # nmol/L/day
-        kNO2TONO3=7.022,  # nmol/L/day
+        kNH4TONO2=0.192451418,  # nmol/L/day
+        kNO2TONO3=0.0,  # nmol/L/day
         kNO3TONO2=None,  # nmol/L/day
         kN2OCONS=0.019,  # /day
     )
@@ -120,7 +120,7 @@ def metadata(key):
         NO3_ambient=29.56 * 1000,  # nmol/L
         d15NO2_ambient=0.0,  # per mil, NO PS1 DATA
         d15NO3_ambient=7.79,  # per mil
-        kNH4TONO2=0.432715,  # nmol/L/day
+        kNH4TONO2=0.432715909,  # nmol/L/day
         kNO2TONO3=0.0,  # nmol/L/day
         kNO3TONO2=24.8941754,  # nmol/L/day
         kN2OCONS=0.0,  # /day
@@ -136,9 +136,9 @@ def metadata(key):
         NO3_ambient=0.58 * 1000,  # nmol/L
         d15NO2_ambient=-0.25,  # per mil, PS2 PNM, sigma-theta=24.11
         d15NO3_ambient=11.77,  # per mil
-        kNH4TONO2=0.05343,  # nmol/L/day
-        kNO2TONO3=177.5,  # nmol/L/day
-        kNO3TONO2=1.462,  # nmol/L/day
+        kNH4TONO2=None,  # nmol/L/day
+        kNO2TONO3=0.0,  # nmol/L/day
+        kNO3TONO2=0.0,  # nmol/L/day
         kN2OCONS=0.031,  # /day
     )
 
@@ -152,7 +152,7 @@ def metadata(key):
         NO3_ambient=19.73 * 1000,  # nmol/L
         d15NO2_ambient=-0.25,  # per mil, PS2 PNM, sigma-theta=24.11
         d15NO3_ambient=10.98,  # per mil
-        kNH4TONO2=1.194643105,  # nmol/L/day
+        kNH4TONO2=1.348781554,  # nmol/L/day
         kNO2TONO3=11.35684936,  # nmol/L/day
         kNO3TONO2=0.0,  # nmol/L/day
         kN2OCONS=0.042,  # /day
@@ -168,7 +168,7 @@ def metadata(key):
         NO3_ambient=25.63 * 1000,  # nmol/L
         d15NO2_ambient=-21.72,  # per mil, PS2 SNM, sigma-theta=26.34
         d15NO3_ambient=10.18,  # per mil
-        kNH4TONO2=2.574592445,  # nmol/L/day
+        kNH4TONO2=2.700574986,  # nmol/L/day
         kNO2TONO3=27.60796281,  # nmol/L/day
         kNO3TONO2=0.0,  # nmol/L/day
         kN2OCONS=0.019,  # /day
@@ -184,9 +184,9 @@ def metadata(key):
         NO3_ambient=26.48 * 1000,  # nmol/L
         d15NO2_ambient=-22.82,  # per mil
         d15NO3_ambient=15.25,  # per mil
-        kNH4TONO2=0.5397,  # nmol/L/day
-        kNO2TONO3=73.23,  # nmol/L/day
-        kNO3TONO2=25.74,  # nmol/L/day
+        kNH4TONO2=0.0,  # nmol/L/day
+        kNO2TONO3=73.23197829,  # nmol/L/day
+        kNO3TONO2=25.75670779,  # nmol/L/day
         kN2OCONS=0.056,  # /day
     )
 
@@ -201,8 +201,8 @@ def metadata(key):
         d15NO2_ambient=-19.68,  # per mil
         d15NO3_ambient=19.74,  # per mil
         kNH4TONO2=0.0,  # nmol/L/day
-        kNO2TONO3=14.62058016,  # nmol/L/day
-        kNO3TONO2=22.75691583,  # nmol/L/day
+        kNO2TONO3=0.0,  # nmol/L/day
+        kNO3TONO2=0.0,  # nmol/L/day
         kN2OCONS=0.065,  # /day
     )
 
@@ -217,7 +217,7 @@ def metadata(key):
         d15NO2_ambient=-19.68,  # per mil, PS2 SNM, sigma-theta=26.509
         d15NO3_ambient=12.33,  # per mil
         kNH4TONO2=0.0,  # nmol/L/day
-        kNO2TONO3=None,  # nmol/L/day NO DATA YET
+        kNO2TONO3=10.78305924,  # nmol/L/day NO DATA YET
         kNO3TONO2=41.69345556,  # nmol/L/day
         kN2OCONS=0.025,  # /day
     )
@@ -232,9 +232,9 @@ def metadata(key):
         NO3_ambient=42.58 * 1000,  # nmol/L
         d15NO2_ambient=-19.68,  # per mil, PS2 SNM, sigma-theta=26.509
         d15NO3_ambient=8.86,  # per mil
-        kNH4TONO2=0.0,  # nmol/L/day
-        kNO2TONO3=0.0,  # nmol/L/day
-        kNO3TONO2=146.270416,  # nmol/L/day
+        kNH4TONO2=0.462805244,  # nmol/L/day
+        kNO2TONO3=272.8172186,  # nmol/L/day
+        kNO3TONO2=0.0,  # nmol/L/day
         kN2OCONS=0.075,  # /day
     )
 
@@ -250,8 +250,24 @@ def metadata(key):
         d15NO3_ambient=7.72,  # per mil
         kNH4TONO2=0.205963228,  # nmol/L/day
         kNO2TONO3=0.0,  # nmol/L/day
-        kNO3TONO2=18.87092432,  # nmol/L/day
+        kNO3TONO2=0.0,  # nmol/L/day
         kN2OCONS=0.075,  # /day
+    )
+
+    datadict["PS3Top of oxycline"] = experiment(
+        depth=14.595,  # meters
+        sigma_theta=23.0983,  # kg/m3
+        station="PS3",  # "PS1" = offshore, "PS2" = center of ODZ, "PS3" = coastal
+        feature="Top of oxycline",  # within the oxycline below the ODZ
+        NH4_ambient=399.62,  # nmol/L
+        NO2_ambient=0.4 * 1000,  # nmol/L
+        NO3_ambient=9.48 * 1000,  # nmol/L
+        d15NO2_ambient=-1.25,  # per mil, PS3 PNM, sigma-theta=24.0672
+        d15NO3_ambient=14.37,  # per mil
+        kNH4TONO2=0.0,  # nmol/L/day
+        kNO2TONO3=0.0,  # nmol/L/day
+        kNO3TONO2=0.0,  # nmol/L/day
+        kN2OCONS=0.043,  # /day
     )
 
     return datadict[key]

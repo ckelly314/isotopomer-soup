@@ -17,7 +17,7 @@ def modelparams():
 
     # number of timesteps (y)
     # increasing n(timesteps) by a factor of 10 decreases rate constants by the same factor
-    T = 1000  # this gets us up to timestep 999
+    T = 1050  # this gets us up to timestep 999
     times = np.array(list(range(1, T + 1)))  # vector of timesteps
 
     return (dt,T,times)
