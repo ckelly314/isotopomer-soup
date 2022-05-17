@@ -89,7 +89,7 @@ def x0(station=None, feature=None, key=None):
         T=nT,
     )
 
-    # run model for 15NH4+ experiment
+    # run model for 15NO3- experiment
     bgc = BioGeoChemistry(key, tracer="NO3-")
     tr = Tracers(nT, bgc, data)
     tracers = modelv3(x, bgc, isos, tr, (dt,nT, times))
@@ -125,7 +125,7 @@ def x0(station=None, feature=None, key=None):
         T=nT,
     )
 
-    # run model for 15NH4+ experiment
+    # run model for 15NO2- experiment
     bgc = BioGeoChemistry(key, tracer="NO2-")
     tr = Tracers(nT, bgc, data)
     tracers = modelv3(x, bgc, isos, tr, (dt,nT, times))
@@ -172,13 +172,12 @@ def x0(station=None, feature=None, key=None):
     # we'll use the rates of production of 45N2Oa and 45N2Ob in the 15NO2- experiment
     p45a = max(0, stats.linregress(data.Incubation_time_days, data["45N2Oa"]).slope)
     p45b = max(0, stats.linregress(data.Incubation_time_days, data["45N2Ob"]).slope)
-    p45average = (p45a + p45b) / 2
+    p45average = (p45a + p45b)
 
-    probabilitya = (1 - tracers.afnh4[1:]) * tracers.afno2[1:]
-    probabilityb = (
-        tracers.afnh4[1:] * (1 - tracers.afno2[1:])
-        + (1 - tracers.afnh4[1:]) * tracers.afno2[1:]
-    )
+    p1, p2, p3, p4 = binomial(tracers.afno2[1:], tracers.afnh4[1:])
+
+    probabilitya = p2
+    probabilityb = p2 + p3
     concentration = (tracers.nh4_14[1:] + tracers.nh4_15[1:]) * (
         tracers.no2_14[1:] + tracers.no2_15[1:]
     )
@@ -191,11 +190,10 @@ def x0(station=None, feature=None, key=None):
 
     ### 6. estimate k values for hybrid production from NO & NH2OH ###
 
-    probabilitya = (1 - tracers.afnh2oh[1:]) * tracers.afno[1:]
-    probabilityb = (
-        tracers.afnh2oh[1:] * (1 - tracers.afno[1:])
-        + (1 - tracers.afnh2oh[1:]) * tracers.afno[1:]
-    )
+    p1, p2, p3, p4 = binomial_stoichiometry(tracers.afno[1:], tracers.afnh2oh[1:])
+
+    probabilitya = p2
+    probabilityb = p2 + p3
     concentration = (tracers.nh2oh_14[1:] + tracers.nh2oh_15[1:]) * (
         tracers.no_14[1:] + tracers.no_15[1:]
     )
@@ -205,6 +203,22 @@ def x0(station=None, feature=None, key=None):
 
     print(f"estimated k for hybrid pathway #1 from NH2OH & NO: {kestimate_hybrid3}")
     print(f"estimated k for hybrid pathway #2 from NH2OH & NO: {kestimate_hybrid4}")
+
+    ### 7. estimate k values for hybrid production from NO2- & NH2OH ###
+
+    p1, p2, p3, p4 = binomial(tracers.afno2[1:], tracers.afnh2oh[1:])
+
+    probabilitya = p2
+    probabilityb = p2 + p3
+    concentration = (tracers.nh2oh_14[1:] + tracers.nh2oh_15[1:]) * (
+        tracers.no2_14[1:] + tracers.no2_15[1:]
+    )
+
+    kestimate_hybrid5 = np.median(p45a / probabilitya / concentration)
+    kestimate_hybrid6 = np.median(p45average / probabilityb / concentration)
+
+    print(f"estimated k for hybrid pathway #1 from NH2OH & NO2-: {kestimate_hybrid5}")
+    print(f"estimated k for hybrid pathway #2 from NH2OH & NO2-: {kestimate_hybrid6}")
 
     # function returns:
     return [
@@ -216,4 +230,6 @@ def x0(station=None, feature=None, key=None):
         kestimate_hybrid2,
         kestimate_hybrid3,
         kestimate_hybrid4,
+        kestimate_hybrid5,
+        kestimate_hybrid6
     ]

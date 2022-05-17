@@ -7,7 +7,7 @@ N2O is produced from NH4+, NO, NO3-, and two hybrid pathways,
 which produce N2O from a combination of NH2OH and NO.
 """
 
-from .. import binomial
+from .. import binomial, binomial_stoichiometry
 
 # produce n2o from intermediates, plus denitrification from NO
 
@@ -119,7 +119,7 @@ def modelv3(x, bgc, isos, tracers, modelparams):
 
         # calculate probabilities of isotopomer formation
 
-        p1, p2, p3, p4 = binomial(tracers.afno[iT], tracers.afnh2oh[iT])
+        p1, p2, p3, p4 = binomial_stoichiometry(tracers.afno[iT], tracers.afnh2oh[iT])
 
         p46hybrid1 = p1
         p45ahybrid1 = p2 # (p2+p3)/2

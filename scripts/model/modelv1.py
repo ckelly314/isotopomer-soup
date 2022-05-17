@@ -8,6 +8,7 @@ which produce N2O from a combination of NH4+ and NO2-.
 """
 
 from .. import binomial
+import numpy as np
 
 # no intermediates
 def modelv1(x, bgc, isos, tracers, modelparams):
@@ -92,6 +93,8 @@ def modelv1(x, bgc, isos, tracers, modelparams):
 
         # calculate probabilities of isotopomer formation
 
+        f = (0.02*np.random.randn() + 0.5)
+
         p1, p2, p3, p4 = binomial(tracers.afno2[iT], tracers.afnh4[iT])
 
         p46hybrid1 = p1
@@ -100,8 +103,8 @@ def modelv1(x, bgc, isos, tracers, modelparams):
         p44hybrid1 = p4
 
         p46hybrid2 = p1
-        p45ahybrid2 = (p2+p3)/2
-        p45bhybrid2 = (p2+p3)/2
+        p45ahybrid2 = (p2+p3)*f
+        p45bhybrid2 = (p2+p3)*(1-f)
         p44hybrid2 = p4
         
         p46nh4, p45anh4, p45bnh4, p44nh4 = binomial(tracers.afnh4[iT], tracers.afnh4[iT])

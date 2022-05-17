@@ -163,6 +163,48 @@ def postprocess(bgc, isos, tracers, x, model):
         print(f'Hybrid 1 (nM/day): {output.hybrid1.mean()}')
         print(f'Hybrid 2 (nM/day): {output.hybrid2.mean()}')
 
+    elif model=="modelv4":
+
+        kAOB = bgc.kNH4TONO2
+        kAOA = bgc.kNH4TONO2
+
+        output["NH4TONO2AOB"] = kAOB *tracers.nh4_14 + kAOB*isos.alpha15NH4TONO2AOB*tracers.nh4_15
+        output["NH4TONH2OH"] = kAOA*tracers.nh4_14 + kAOA/isos.alpha15NH4TONO2AOA*tracers.nh4_15
+        output["NH2OHTONO"] = kAOA*tracers.nh2oh_14 + kAOA/isos.alpha15NH4TONO2AOA*tracers.nh2oh_15
+        output["NOTONO2"] = kAOA*tracers.no_14 + kAOA/isos.alpha15NH4TONO2AOA*tracers.no_15
+        output["NO2TONO"] = bgc.kNO2TONO*tracers.no2_14 + bgc.kNO2TONO/isos.alpha15NO2TONO*tracers.no2_15
+
+        [knitrification, kdenitno2, kdenitno3, khybrid1, khybrid2] = x
+
+        output['nitrification'] = knitrification*((tracers.nh4_14+tracers.nh4_15)**2)
+        output['denitno2'] = kdenitno2*((tracers.no2_14+tracers.no2_15)**2)
+        output['denitno3'] = kdenitno3*((tracers.no3_14+tracers.no3_15)**2)
+        output['hybrid1'] = khybrid1*(tracers.nh2oh_14+tracers.nh2oh_15)*(tracers.no2_14+tracers.no2_15)
+        output['hybrid2'] = khybrid2*(tracers.nh2oh_14+tracers.nh2oh_15)*(tracers.no2_14+tracers.no2_15)
+
+        print(f'Nit. (nM/day): {output.nitrification.mean()}')
+        print(f'Denit. from NO2- (nM/day): {output.denitno2.mean()}')
+        print(f'Denit. from NO3- (nM/day): {output.denitno3.mean()}')
+        print(f'Hybrid 1 (nM/day): {output.hybrid1.mean()}')
+        print(f'Hybrid 2 (nM/day): {output.hybrid2.mean()}')
+    
+    elif model=="modelv5":
+
+        output["NH4TONO2"] = bgc.kNH4TONO2*tracers.nh4_14 + bgc.kNH4TONO2/isos.alpha15NH4TONO2AOA*tracers.nh4_15
+
+        [knitrification, kdenitno2, kdenitno3, khybrid2, f] = x
+
+        output['nitrification'] = knitrification*((tracers.nh4_14+tracers.nh4_15)**2)
+        output['denitno2'] = kdenitno2*((tracers.no2_14+tracers.no2_15)**2)
+        output['denitno3'] = kdenitno3*((tracers.no3_14+tracers.no3_15)**2)
+        output['hybrid2'] = khybrid2*(tracers.nh4_14+tracers.nh4_15)*(tracers.no2_14+tracers.no2_15)
+
+        print(f'Nit. (nM/day): {output.nitrification.mean()}')
+        print(f'Denit. from NO2- (nM/day): {output.denitno2.mean()}')
+        print(f'Denit. from NO3- (nM/day): {output.denitno3.mean()}')
+        print(f'Hybrid 2 (nM/day): {output.hybrid2.mean()}')
+        print(f'f: {f}')
+    
     output["Incubation_time_hrs"] = output.index/1000*24
     
     output['check_mass_conservation'] = output.loc[:,['[NH4+]_nM','[NH2OH]_nM','[NO]_nM','[NO3-]_nM','[NO2-]_nM','[N2O]_nM','[N2]_nM']].sum(axis=1)

@@ -38,6 +38,8 @@ def scatter_plot(data=None, station=None, feature=None, tracer=None, modeloutput
         (data.Station == station) & (data.Feature == feature) & (data.Tracer == tracer)
     ]
 
+    trainingdata = trainingdata[trainingdata.Flag!=4]
+
     fig, axes = plt.subplots(2, 2, figsize=(7, 6))
 
     ax = axes[0, 0]
@@ -106,5 +108,5 @@ def scatter_plot(data=None, station=None, feature=None, tracer=None, modeloutput
     fig.suptitle(f"Station: {station}, Feature: {feature}, Tracer: {tracer}")
 
     plt.tight_layout()
-
     plt.savefig(filename)
+    plt.show()

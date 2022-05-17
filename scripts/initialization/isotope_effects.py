@@ -65,6 +65,9 @@ class IsotopeEffects:
         self.alpha15NO2TONO = 22.0 / 1000.0 + 1 # Martin and Casciotti, 2016, Cu-NIR
         #self.alpha15NO2TONO = 8.0 / 1000 + 1 # Martin and Casciotti, 2016, Fe-NIR
 
+        # isotope effect for N2O production by AOA
+        self.SPnitrification = 30 / 1000 + 1 # Santoro et al., 2011 (adjusted based on δ15NH4+ value)
+
         self.alpha15N2OatoN2 = 11.8 / 1000.0 + 1  # Kelly et al., 2021
         self.alpha15N2ObtoN2 = 0.0 / 1000.0 + 1  # Kelly et al., 2021
         self.alpha46N2OtoN2 = (11.8 / 1000.0 + 1)  # assume this is the same as the alpha effect

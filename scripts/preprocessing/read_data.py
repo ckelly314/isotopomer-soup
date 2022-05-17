@@ -6,6 +6,7 @@ Read in incubation data to train N2O production model.
 """
 
 import pandas as pd
+import numpy as np
 
 
 def read_data(filename):
@@ -33,6 +34,8 @@ def get_experiment(data=None, station=None, feature=None, tracer=None):
     trainingdata = data[
         (data.Station == station) & (data.Feature == feature) & (data.Tracer == tracer)
     ]
+
+    trainingdata = trainingdata[trainingdata.Flag!=4]
 
     # compute average isotopomer concentrations at each timepoints
     timepoints = trainingdata.groupby("Incubation_time_hrs").mean().reset_index()
@@ -95,6 +98,17 @@ def grid_data(filename=None, station=None, feature=None, tracer=None, T=None):
     ] = (  # "slide" data to the left to match model output
         gridded_data["timepoint"] - gridded_data["timepoint"][0]
     )
+
+    if (np.isnan(gridded_data['44N2O'][0])==True)&(np.isnan(gridded_data['44N2O'][1])==False):
+        gridded_data['44N2O'][0] = gridded_data['44N2O'][1]
+        gridded_data['45N2Oa'][0] = gridded_data['45N2Oa'][1]
+        gridded_data['45N2Ob'][0] = gridded_data['45N2Ob'][1]
+        gridded_data['46N2O'][0] = gridded_data['46N2O'][1]
+    elif (np.isnan(gridded_data['44N2O'][0])==True)&(np.isnan(gridded_data['44N2O'][1])==True):
+        gridded_data['44N2O'][0] = gridded_data['44N2O'][2]
+        gridded_data['45N2Oa'][0] = gridded_data['45N2Oa'][2]
+        gridded_data['45N2Ob'][0] = gridded_data['45N2Ob'][2]
+        gridded_data['46N2O'][0] = gridded_data['46N2O'][2]
 
     return gridded_data
 
