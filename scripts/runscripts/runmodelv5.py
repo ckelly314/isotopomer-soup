@@ -45,7 +45,7 @@ def runmodelv5(station, feature):
                     modeled_45a = tracersNH4.n2o_45a,
                     modeled_45b = tracersNH4.n2o_45b,
                     modeled_46 = tracersNH4.n2o_46,
-                    weights = np.array([0,1000,1000,1000]))
+                    weights = np.array([1,1000,1000,1000]))
         
         tracersNO2 = modelv5(x, bgcNO2, isos, trNO2, params)
         
@@ -54,7 +54,7 @@ def runmodelv5(station, feature):
                     modeled_45a = tracersNO2.n2o_45a,
                     modeled_45b = tracersNO2.n2o_45b,
                     modeled_46 = tracersNO2.n2o_46,
-                    weights = np.array([0,1000,1000,1000]))
+                    weights = np.array([1,1000,1000,1000]))
         
         tracersNO3 = modelv5(x, bgcNO3, isos, trNO3, params)
         
@@ -63,7 +63,7 @@ def runmodelv5(station, feature):
                     modeled_45a = tracersNO3.n2o_45a,
                     modeled_45b = tracersNO3.n2o_45b,
                     modeled_46 = tracersNO3.n2o_46,
-                    weights = np.array([0,1000,1000,1000]))
+                    weights = np.array([1,1000,1000,1000]))
         
         cost = costNH4 + costNO2 + costNO3
         

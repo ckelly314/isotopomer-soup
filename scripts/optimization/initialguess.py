@@ -45,7 +45,7 @@ def x0(station=None, feature=None, key=None):
 
     # to estimate the rate constant for N2O production from NH4+,
     # we'll use the rate of production of 46N2O in the 15NH4+ experiment
-    data = grid_data(
+    dataNH4 = grid_data(
         filename=f"{path_to_file}00_incubationdata.csv",
         station=station,
         feature=feature,
@@ -54,25 +54,25 @@ def x0(station=None, feature=None, key=None):
     )
 
     # run model for 15NH4+ experiment
-    bgc = BioGeoChemistry(key, tracer="NH4+")
-    tr = Tracers(nT, bgc, data)
-    tracers = modelv3(x, bgc, isos, tr, (dt, nT, times))
+    bgcNH4 = BioGeoChemistry(key, tracer="NH4+")
+    trNH4 = Tracers(nT, bgcNH4, dataNH4)
+    tracersNH4 = modelv3(x, bgcNH4, isos, trNH4, (dt, nT, times))
 
     # calculations
-    data["Incubation_time_days"] = (
-        data.Incubation_time_hrs / 24.0
+    dataNH4["Incubation_time_days"] = (
+        dataNH4.Incubation_time_hrs / 24.0
     )  # we want rate constants in units of /nM/day
-    p46 = max(
-        0, stats.linregress(data.Incubation_time_days, data["46N2O"]).slope
+    p46NH4 = max(
+        0, stats.linregress(dataNH4.Incubation_time_days, dataNH4["46N2O"]).slope
     )  # set slope to zero if negative
-    probability = (
-        tracers.afnh4[1:] ** 2
+    probabilityNH4 = (
+        tracersNH4.afnh4[1:] ** 2
     )  # total production from bacterial process ~= prdxn. of 46N2O/AF^2
-    concentration = (
-        tracers.nh4_14[1:] + tracers.nh4_15[1:]
+    concentrationNH4 = (
+        tracersNH4.nh4_14[1:] + tracersNH4.nh4_15[1:]
     ) ** 2  # k (/nM/day) = nitrification (nM/day)/[NH4+]^2 (nM)
     kestimateNH4 = np.median(
-        p46 / probability / concentration
+        p46NH4 / probabilityNH4 / concentrationNH4
     )  # take the median value of the resulting array
 
     print(f"estimated k for N2O production from NH4+: {kestimateNH4}")
