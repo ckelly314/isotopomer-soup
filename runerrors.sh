@@ -14,6 +14,7 @@ ml reset
 module load python/3.9.0
 module load py-numpy/1.20.3_py39
 module load py-pandas/1.3.1_py39
+module load py-scipy/1.6.3_py39
 module load viz py-matplotlib/3.4.2_py39
 
 python3 runerrors.py
