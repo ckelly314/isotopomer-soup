@@ -7,7 +7,7 @@
 #SBATCH --mem=5G # How much memory?
 #SBATCH --mail-type=END,FAIL
 #SBATCH --mail-user=clkelly@stanford.edu
-#SBATCH --time=10:00 # how much time?
+#SBATCH --time=30:00 # how much time?
 #
 
 ml reset
