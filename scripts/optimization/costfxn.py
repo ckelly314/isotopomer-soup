@@ -63,9 +63,10 @@ def costfxn(
 
     # compute difference of modeled and measured isotopomers at each timepoint
     error44 = modeled_44[indices] - np.array(trainingdata[["44N2O"]])
-    error45a = modeled_45a[indices] - np.array(trainingdata[["45N2Oa"]])
-    error45b = modeled_45b[indices] - np.array(trainingdata[["45N2Ob"]])
-    error46 = modeled_46[indices] - np.array(trainingdata[["46N2O"]])
+    # multiply by 1000 since rare isotopocules are typically 2-3 orders of magnitude lower in concentration than 44N2o
+    error45a = (modeled_45a[indices] - np.array(trainingdata[["45N2Oa"]]))*1000
+    error45b = (modeled_45b[indices] - np.array(trainingdata[["45N2Ob"]]))*1000
+    error46 = (modeled_46[indices] - np.array(trainingdata[["46N2O"]]))*1000
 
     # condense error arrays into an RMSE and return array of RMSE's
     errors = np.array([rmse(error44), rmse(error45a), rmse(error45b), rmse(error46)])

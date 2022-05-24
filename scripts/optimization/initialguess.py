@@ -81,7 +81,7 @@ def x0(station=None, feature=None, key=None):
 
     # to estimate the rate constant for N2O production from NO3-,
     # we'll use the rate of production of 46N2O in the 15NO3- experiment
-    data = grid_data(
+    dataNO3 = grid_data(
         filename=f"{path_to_file}00_incubationdata.csv",
         station=station,
         feature=feature,
@@ -90,25 +90,25 @@ def x0(station=None, feature=None, key=None):
     )
 
     # run model for 15NO3- experiment
-    bgc = BioGeoChemistry(key, tracer="NO3-")
-    tr = Tracers(nT, bgc, data)
-    tracers = modelv3(x, bgc, isos, tr, (dt,nT, times))
+    bgcNO3 = BioGeoChemistry(key, tracer="NO3-")
+    trNO3 = Tracers(nT, bgcNO3, dataNO3)
+    tracersNO3 = modelv3(x, bgcNO3, isos, trNO3, (dt,nT, times))
 
     # calculations
-    data["Incubation_time_days"] = (
-        data.Incubation_time_hrs / 24.0
+    dataNO3["Incubation_time_days"] = (
+        dataNO3.Incubation_time_hrs / 24.0
     )  # we want rate constants in units of /nM/day
-    p46 = max(
-        0, stats.linregress(data.Incubation_time_days, data["46N2O"]).slope
+    p46NO3 = max(
+        0, stats.linregress(dataNO3.Incubation_time_days, dataNO3["46N2O"]).slope
     )  # set slope to zero if negative
-    probability = (
-        tracers.afno3[1:] ** 2
+    probabilityNO3 = (
+        tracersNO3.afno3[1:] ** 2
     )  # total production from bacterial process ~= prdxn. of 46N2O/AF^2
-    concentration = (
-        tracers.no3_14[1:] + tracers.no3_15[1:]
+    concentrationNO3 = (
+        tracersNO3.no3_14[1:] + tracersNO3.no3_15[1:]
     ) ** 2  # k (/nM/day) = nitrification (nM/day)/[NH4+]^2 (nM)
     kestimateNO3 = np.median(
-        p46 / probability / concentration
+        p46NO3 / probabilityNO3 / concentrationNO3
     )  # take the median value of the resulting array
 
     print(f"estimated k for N2O production from NO3-: {kestimateNO3}")
@@ -117,7 +117,7 @@ def x0(station=None, feature=None, key=None):
 
     # to estimate the rate constant for N2O production from NO2-,
     # we'll use the rate of production of 46N2O in the 15NO2- experiment
-    data = grid_data(
+    dataNO2 = grid_data(
         filename=f"{path_to_file}00_incubationdata.csv",
         station=station,
         feature=feature,
@@ -126,25 +126,25 @@ def x0(station=None, feature=None, key=None):
     )
 
     # run model for 15NO2- experiment
-    bgc = BioGeoChemistry(key, tracer="NO2-")
-    tr = Tracers(nT, bgc, data)
-    tracers = modelv3(x, bgc, isos, tr, (dt,nT, times))
+    bgcNO2 = BioGeoChemistry(key, tracer="NO2-")
+    trNO2 = Tracers(nT, bgcNO2, dataNO2)
+    tracersNO2 = modelv3(x, bgcNO2, isos, trNO2, (dt,nT, times))
 
     # calculations
-    data["Incubation_time_days"] = (
-        data.Incubation_time_hrs / 24.0
+    dataNO2["Incubation_time_days"] = (
+        dataNO2.Incubation_time_hrs / 24.0
     )  # we want rate constants in units of /nM/day
-    p46 = max(
-        0, stats.linregress(data.Incubation_time_days, data["46N2O"]).slope
+    p46NO2 = max(
+        0, stats.linregress(dataNO2.Incubation_time_days, dataNO2["46N2O"]).slope
     )  # set slope to zero if negative
-    probability = (
-        tracers.afno2[1:] ** 2
+    probabilityNO2 = (
+        tracersNO2.afno2[1:] ** 2
     )  # total production from bacterial process ~= prdxn. of 46N2O/AF^2
-    concentration = (
-        tracers.no2_14[1:] + tracers.no2_15[1:]
+    concentrationNO2 = (
+        tracersNO2.no2_14[1:] + tracersNO2.no2_15[1:]
     ) ** 2  # k (/nM/day) = nitrification (nM/day)/[NH4+]^2 (nM)
     kestimateNO2 = np.median(
-        p46 / probability / concentration
+        p46NO2 / probabilityNO2 / concentrationNO2
     )  # take the median value of the resulting array
 
     print(f"estimated k for N2O production from NO2-: {kestimateNO2}")
@@ -154,14 +154,14 @@ def x0(station=None, feature=None, key=None):
     # to estimate the rate constant for N2O production from NO,
     # we'll use the rate of production of 46N2O in the 15NO2- experiment
     # which is already loaded from above
-    probability = (
-        tracers.afno[1:] ** 2
+    probabilityNO = (
+        tracersNO2.afno[1:] ** 2
     )  # total production from bacterial process ~= prdxn. of 46N2O/AF^2
-    concentration = (
-        tracers.no_14[1:] + tracers.no_15[1:]
+    concentrationNO = (
+        tracersNO2.no_14[1:] + tracersNO2.no_15[1:]
     ) ** 2  # k (/nM/day) = nitrification (nM/day)/[NH4+]^2 (nM)
     kestimateNO = np.median(
-        p46 / probability / concentration
+        p46NO2 / probabilityNO / concentrationNO
     )  # take the median value of the resulting array
 
     print(f"estimated k for N2O production from NO: {kestimateNO}")
@@ -170,52 +170,95 @@ def x0(station=None, feature=None, key=None):
 
     # to estimate the rate constants for hybrid N2O production,
     # we'll use the rates of production of 45N2Oa and 45N2Ob in the 15NO2- experiment
-    p45a = max(0, stats.linregress(data.Incubation_time_days, data["45N2Oa"]).slope)
-    p45b = max(0, stats.linregress(data.Incubation_time_days, data["45N2Ob"]).slope)
-    p45average = (p45a + p45b)
+    p45aNO2 = max(0, stats.linregress(dataNO2.Incubation_time_days, dataNO2["45N2Oa"]).slope)
+    p45bNO2 = max(0, stats.linregress(dataNO2.Incubation_time_days, dataNO2["45N2Ob"]).slope)
+    p45averageNO2 = (p45aNO2 + p45bNO2)
 
-    p1, p2, p3, p4 = binomial(tracers.afno2[1:], tracers.afnh4[1:])
+    p45aNH4 = max(0, stats.linregress(dataNH4.Incubation_time_days, dataNH4["45N2Oa"]).slope)
+    p45bNH4 = max(0, stats.linregress(dataNH4.Incubation_time_days, dataNH4["45N2Ob"]).slope)
+    p45averageNH4 = (p45aNH4 + p45bNH4)
 
-    probabilitya = p2
-    probabilityb = p2 + p3
-    concentration = (tracers.nh4_14[1:] + tracers.nh4_15[1:]) * (
-        tracers.no2_14[1:] + tracers.no2_15[1:]
+    p1NO2, p2NO2, p3NO2, p4NO2 = binomial(tracersNO2.afno2[1:], tracersNO2.afnh4[1:])
+    p1NH4, p2NH4, p3NH4, p4NH4 = binomial(tracersNH4.afno2[1:], tracersNH4.afnh4[1:])
+
+    probabilityaNO2 = p2NO2
+    probabilitybNO2 = p2NO2 + p3NO2
+    concentrationNO2 = (tracersNO2.nh4_14[1:] + tracersNO2.nh4_15[1:]) * (
+        tracersNO2.no2_14[1:] + tracersNO2.no2_15[1:]
     )
 
-    kestimate_hybrid1 = np.median(p45a / probabilitya / concentration)
-    kestimate_hybrid2 = np.median(p45average / probabilityb / concentration)
+    probabilityaNH4 = p2NH4
+    probabilitybNH4 = p2NH4 + p3NH4
+    concentrationNH4 = (tracersNH4.nh4_14[1:] + tracersNH4.nh4_15[1:]) * (
+        tracersNH4.no2_14[1:] + tracersNH4.no2_15[1:]
+    )
+
+    kestimate_hybrid1NO2 = np.median(p45aNO2 / probabilityaNO2 / concentrationNO2)
+    kestimate_hybrid2NO2 = np.median(p45averageNO2 / probabilitybNO2 / concentrationNO2)
+
+    kestimate_hybrid1NH4 = np.median(p45aNH4 / probabilityaNH4 / concentrationNH4)
+    kestimate_hybrid2NH4 = np.median(p45averageNH4 / probabilitybNH4 / concentrationNH4)
+
+    kestimate_hybrid1 = (kestimate_hybrid1NO2 + kestimate_hybrid1NH4)/2
+    kestimate_hybrid2 = (kestimate_hybrid2NO2 + kestimate_hybrid2NH4)/2
 
     print(f"estimated k for hybrid pathway #1 from NH4+ & NO2-: {kestimate_hybrid1}")
     print(f"estimated k for hybrid pathway #2 from NH4+ & NO2-: {kestimate_hybrid2}")
 
     ### 6. estimate k values for hybrid production from NO & NH2OH ###
 
-    p1, p2, p3, p4 = binomial_stoichiometry(tracers.afno[1:], tracers.afnh2oh[1:])
+    p1NO2, p2NO2, p3NO2, p4NO2 = binomial_stoichiometry(tracersNO2.afno[1:], tracersNO2.afnh2oh[1:])
+    p1NH4, p2NH4, p3NH4, p4NH4 = binomial_stoichiometry(tracersNH4.afno[1:], tracersNH4.afnh2oh[1:])
 
-    probabilitya = p2
-    probabilityb = p2 + p3
-    concentration = (tracers.nh2oh_14[1:] + tracers.nh2oh_15[1:]) * (
-        tracers.no_14[1:] + tracers.no_15[1:]
+    probabilityaNO2 = p2NO2
+    probabilitybNO2 = p2NO2 + p3NO2
+    concentrationNO2 = (tracersNO2.nh2oh_14[1:] + tracersNO2.nh2oh_15[1:]) * (
+        tracersNO2.no_14[1:] + tracersNO2.no_15[1:]
     )
 
-    kestimate_hybrid3 = np.median(p45a / probabilitya / concentration)
-    kestimate_hybrid4 = np.median(p45average / probabilityb / concentration)
+    probabilityaNH4 = p2NH4
+    probabilitybNH4 = p2NH4 + p3NH4
+    concentrationNH4 = (tracersNH4.nh2oh_14[1:] + tracersNH4.nh2oh_15[1:]) * (
+        tracersNH4.no_14[1:] + tracersNH4.no_15[1:]
+    )
+
+    kestimate_hybrid3NO2 = np.median(p45aNO2 / probabilityaNO2 / concentrationNO2)
+    kestimate_hybrid4NO2 = np.median(p45averageNO2 / probabilitybNO2 / concentrationNO2)
+
+    kestimate_hybrid3NH4 = np.median(p45aNH4 / probabilityaNH4 / concentrationNH4)
+    kestimate_hybrid4NH4 = np.median(p45averageNH4 / probabilitybNH4 / concentrationNH4)
+
+    kestimate_hybrid3 = (kestimate_hybrid3NO2 + kestimate_hybrid3NH4)/2
+    kestimate_hybrid4 = (kestimate_hybrid4NO2 + kestimate_hybrid4NH4)/2
 
     print(f"estimated k for hybrid pathway #1 from NH2OH & NO: {kestimate_hybrid3}")
     print(f"estimated k for hybrid pathway #2 from NH2OH & NO: {kestimate_hybrid4}")
 
     ### 7. estimate k values for hybrid production from NO2- & NH2OH ###
 
-    p1, p2, p3, p4 = binomial(tracers.afno2[1:], tracers.afnh2oh[1:])
+    p1NO2, p2NO2, p3NO2, p4NO2 = binomial(tracersNO2.afno2[1:], tracersNO2.afnh2oh[1:])
+    p1NH4, p2NH4, p3NH4, p4NH4 = binomial(tracersNH4.afno2[1:], tracersNH4.afnh2oh[1:])
 
-    probabilitya = p2
-    probabilityb = p2 + p3
-    concentration = (tracers.nh2oh_14[1:] + tracers.nh2oh_15[1:]) * (
-        tracers.no2_14[1:] + tracers.no2_15[1:]
+    probabilityaNO2 = p2NO2
+    probabilitybNO2 = p2NO2 + p3NO2
+    concentrationNO2 = (tracersNO2.nh2oh_14[1:] + tracersNO2.nh2oh_15[1:]) * (
+        tracersNO2.no2_14[1:] + tracersNO2.no2_15[1:]
     )
 
-    kestimate_hybrid5 = np.median(p45a / probabilitya / concentration)
-    kestimate_hybrid6 = np.median(p45average / probabilityb / concentration)
+    probabilityaNH4 = p2NH4
+    probabilitybNH4 = p2NH4 + p3NH4
+    concentrationNH4 = (tracersNH4.nh2oh_14[1:] + tracersNH4.nh2oh_15[1:]) * (
+        tracersNH4.no2_14[1:] + tracersNH4.no2_15[1:]
+    )
+
+    kestimate_hybrid5NO2 = np.median(p45aNO2 / probabilityaNO2 / concentrationNO2)
+    kestimate_hybrid6NO2 = np.median(p45averageNO2 / probabilitybNO2 / concentrationNO2)
+
+    kestimate_hybrid5NH4 = np.median(p45aNH4 / probabilityaNH4 / concentrationNH4)
+    kestimate_hybrid6NH4 = np.median(p45averageNH4 / probabilitybNH4 / concentrationNH4)
+
+    kestimate_hybrid5 = (kestimate_hybrid5NO2 + kestimate_hybrid5NH4)/2
+    kestimate_hybrid6 = (kestimate_hybrid6NO2 + kestimate_hybrid6NH4)/2
 
     print(f"estimated k for hybrid pathway #1 from NH2OH & NO2-: {kestimate_hybrid5}")
     print(f"estimated k for hybrid pathway #2 from NH2OH & NO2-: {kestimate_hybrid6}")

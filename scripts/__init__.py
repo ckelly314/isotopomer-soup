@@ -33,4 +33,4 @@ from .postprocessing.postprocess import postprocess
 
 from .runscripts.run import run
 from .runscripts.runmodelv5 import runmodelv5
-from .runscripts.errors import run_errors
+from .runscripts.errors import errors

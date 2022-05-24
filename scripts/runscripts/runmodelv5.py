@@ -9,13 +9,17 @@ from .datapath import datapath
 from .. import *
 
 
-def runmodelv5(station, feature):
+def runmodelv5(station, feature, weights=None):
 
-    ### KEYWORDS ###
     ### KEYWORDS ###
     stn = station
     ft = feature
     bgckey = stn+ft
+
+    # weights for each tracer experiment
+    # in some cases, these should be adjusted to ensure model-data fit for each tracer experiment
+    if weights is None:
+        weights = np.array([1./3, 1./3, 1./3])
 
     ### INITIALIZATION ###
 
@@ -45,7 +49,8 @@ def runmodelv5(station, feature):
                     modeled_45a = tracersNH4.n2o_45a,
                     modeled_45b = tracersNH4.n2o_45b,
                     modeled_46 = tracersNH4.n2o_46,
-                    weights = np.array([1,1000,1000,1000]))
+                    weights = np.array([1,1,1,1])
+                   )
         
         tracersNO2 = modelv5(x, bgcNO2, isos, trNO2, params)
         
@@ -54,7 +59,8 @@ def runmodelv5(station, feature):
                     modeled_45a = tracersNO2.n2o_45a,
                     modeled_45b = tracersNO2.n2o_45b,
                     modeled_46 = tracersNO2.n2o_46,
-                    weights = np.array([1,1000,1000,1000]))
+                    weights = np.array([1,1,1,1])
+                 )
         
         tracersNO3 = modelv5(x, bgcNO3, isos, trNO3, params)
         
@@ -63,11 +69,14 @@ def runmodelv5(station, feature):
                     modeled_45a = tracersNO3.n2o_45a,
                     modeled_45b = tracersNO3.n2o_45b,
                     modeled_46 = tracersNO3.n2o_46,
-                    weights = np.array([1,1000,1000,1000]))
-        
-        cost = costNH4 + costNO2 + costNO3
-        
-        print(cost)
+                    weights = np.array([0,0,0,4])
+                 )
+
+        cost = np.array([costNH4, costNO2, costNO3])
+
+        print(cost * weights)
+
+        cost = np.sum(cost * weights)
         
         return cost
 
@@ -122,6 +131,9 @@ def runmodelv5(station, feature):
     saveout["Key"] = bgckey
     saveout["cost"] = objective(result.x)
     saveout["f"] = result.x[4]
+    saveout["weightNH4"] = weights[0]
+    saveout["weightNO2"] = weights[1]
+    saveout["weightNO3"] = weights[2]
     saveout = saveout.set_index("Key")
     modeloutput = pd.read_excel("scripts/data/modelv5.xlsx",
                                index_col="Key")
@@ -139,3 +151,4 @@ def runmodelv5(station, feature):
 
     scatter_plot(data=inputdata, station=stn, feature=ft, tracer="NO3-",
                  modeloutput=outputNO3, filename=f"Figures/modelv5/{stn}{ft}NO3-modelv5.pdf")
+

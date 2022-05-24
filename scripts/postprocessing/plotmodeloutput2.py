@@ -8,7 +8,6 @@ Plot model output with incubation data and save figure as a PDF.
 import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
-import scipy.interpolate as interp
 
 
 def scatter_plot(data=None, station=None, feature=None, tracer=None, modeloutput=None, filename=None):
