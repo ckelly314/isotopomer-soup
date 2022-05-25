@@ -146,10 +146,10 @@ def errors(station, feature, weights=None):
         saveout["weightNO2"] = weights[1]
         saveout["weightNO3"] = weights[2]
         saveout = saveout.set_index("Key")
-        modeloutput = pd.read_csv("scripts/data/00_modelv5error.csv",
+        modeloutput = pd.read_csv(f"{datapath()}00_modelv5error.csv",
                                    index_col="Key")
         modeloutput = modeloutput.append(saveout)
-        modeloutput.to_csv("scripts/data/00_modelv5error.csv")
+        modeloutput.to_csv(f"{datapath()}00_modelv5error.csv")
 
         if i==2:
 

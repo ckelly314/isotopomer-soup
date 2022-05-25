@@ -22,16 +22,16 @@ import numpy as np
 
 #sc.errors("PS2", "PNM")
 
-sc.errors("PS2", "Top of oxycline")
+#sc.errors("PS2", "Top of oxycline")
 
-#sc.errors("PS2", "SCM")
-
-#sc.errors("PS2", "SCM", weights = np.array([0.8, 0.1, 0.1]))
+#sc.errors("PS2", "SCM", weights = np.array([0.45, 0.1, 0.45]))
 
 #sc.errors("PS2", "SNM", weights = np.array([0.45, 0.1, 0.45]))
 
 #sc.errors("PS3", "Interface", weights = np.array([0.45, 0.1, 0.45]))
 
 #sc.errors("PS3", "Mid-oxycline")
+
+sc.errors("PS3", "Top of oxycline")
 
 #sc.errors("PS3", "SCM", weights = np.array([0.45, 0.1, 0.45]))
