@@ -156,10 +156,10 @@ def errors(station, feature, weights=None):
             inputdata=pd.read_csv(f'{datapath()}00_incubationdata.csv')
 
             scatter_plot(data=inputdata, station=stn, feature=ft, tracer="NH4+",
-                         modeloutput=outputNH4, filename=f"Figures/modelv5errors/{stn}{ft}NH4+modelv5.pdf")
+                         modeloutput=outputNH4, filename=f"{datapath()}figures/modelv5errors/{stn}{ft}NH4+modelv5.pdf")
 
             scatter_plot(data=inputdata, station=stn, feature=ft, tracer="NO2-",
-                         modeloutput=outputNO2, filename=f"Figures/modelv5errors/{stn}{ft}NO2-modelv5.pdf")
+                         modeloutput=outputNO2, filename=f"{datapath()}figures/modelv5errors/{stn}{ft}NO2-modelv5.pdf")
 
             scatter_plot(data=inputdata, station=stn, feature=ft, tracer="NO3-",
-                         modeloutput=outputNO3, filename=f"Figures/modelv5errors/{stn}{ft}NO3-modelv5.pdf")
+                         modeloutput=outputNO3, filename=f"{datapath()}figures/modelv5errors/{stn}{ft}NO3-modelv5.pdf")
