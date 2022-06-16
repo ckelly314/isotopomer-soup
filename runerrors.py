@@ -40,6 +40,6 @@ import numpy as np
 
 #sc.errors("PS3", "Deep oxycline")
 
-sc.errors("PS3", "Interface2", weights = np.array([0.45, 0.1, 0.45]))
+#sc.errors("PS3", "Interface2", weights = np.array([0.45, 0.1, 0.45]))
 
-#sc.errors("PS3", "SCM", weights = np.array([0.45, 0.1, 0.45]))
+sc.errors("PS3", "SCM", weights = np.array([0.45, 0.1, 0.45]))
