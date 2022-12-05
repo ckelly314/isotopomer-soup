@@ -59,15 +59,15 @@ class BioGeoChemistry:
 
         ### SPIKE & CARRIER INJECTIONS ###
 
-        self.NH4_carrier = 0.50 * 1000  # nmol/L; these are
-        self.NO2_carrier = 1.00 * 1000  # nmol/L
+        self.NH4_carrier = 0.58 * 1000  # nmol/L, median of headspace concentrations
+        self.NO2_carrier = 1.83 * 1000  # nmol/L, median of headspace concentrations
         self.NO3_carrier = 0.0  # nmol/L
 
         self.R15std = 0.00367647  # air N2
         self.af_carrier = self.R15std / (1 + self.R15std)
 
-        self.NH4_spike = 0.50 * 1000  # nmol/L
-        self.NO2_spike = 4.80 * 1000  # nmol/L
+        self.NH4_spike = 0.69 * 1000  # nmol/L, median of headspace concentrations
+        self.NO2_spike = 4.45 * 1000  # nmol/L, median of headspace concentrations
         self.NO3_spike = 1.00 * 1000  # nmol/L
 
         self.af_spike = 0.99999999
