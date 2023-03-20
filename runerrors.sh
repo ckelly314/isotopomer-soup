@@ -1,8 +1,8 @@
 #!/bin/bash
 #
 #SBATCH --job-name=runerrors # give a meaningful name.
-#SBATCH --error=/scratch/users/clkelly/modeloutputs/runerrors.err
-#SBATCH --out=/scratch/users/clkelly/modeloutputs/runerrors-1-%j.out
+#SBATCH --error=runerrors.err
+#SBATCH --out=runerrors-1-%j.out
 #SBATCH -N 1 -n 1 # How many nodes and cores do you need?
 #SBATCH --mem=5G # How much memory?
 #SBATCH --mail-type=END,FAIL
