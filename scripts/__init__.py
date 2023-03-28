@@ -26,6 +26,7 @@ from .model.modelv5 import modelv5
 from .optimization.costfxn import costfxn
 from .optimization.initialguess import x0
 from .optimization.initialguess_modelv1 import x0_v1
+from .optimization.modelv5objective import modelv5objective
 
 from .postprocessing.plotmodeloutput import plot_outputs
 from .postprocessing.plotmodeloutput2 import scatter_plot
@@ -34,3 +35,6 @@ from .postprocessing.postprocess import postprocess
 from .runscripts.run import run
 from .runscripts.runmodelv5 import runmodelv5
 from .runscripts.errors import errors
+
+from .montecarlo.genmontecarlo import genmontecarlo
+from .montecarlo.runmontecarlo import runmontecarlo

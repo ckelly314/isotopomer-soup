@@ -34,5 +34,6 @@ def binomial(af1, af2):
 
     return p1, p2, p3, p4
 
-if __name__=="__main__":
+
+if __name__ == "__main__":
     print(sum(binomial(0.99, 0.003)))

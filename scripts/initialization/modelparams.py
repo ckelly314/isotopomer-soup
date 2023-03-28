@@ -7,6 +7,7 @@ Initialize model parameters.
 
 import numpy as np
 
+
 def modelparams():
 
     ### INITIALIZE MODEL PARAMETERS ###
@@ -20,4 +21,4 @@ def modelparams():
     T = 1050  # this gets us up to timestep 999
     times = np.array(list(range(1, T + 1)))  # vector of timesteps
 
-    return (dt,T,times)
+    return (dt, T, times)

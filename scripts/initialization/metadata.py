@@ -59,7 +59,7 @@ def metadata(key):
         kNH4TONO2=0.0,  # nmol/L/day
         kNO2TONO3=0.0,  # nmol/L/day
         kNO3TONO2=0.542931378,  # nmol/L/day
-        #kN2OCONS=0.079,  # /day, no O2 correction
+        # kN2OCONS=0.079,  # /day, no O2 correction
         kN2OCONS=0.0,  # /day, corrected for O2
     )
 
@@ -76,7 +76,7 @@ def metadata(key):
         kNH4TONO2=0.0,  # nmol/L/day
         kNO2TONO3=0.0,  # nmol/L/day
         kNO3TONO2=0.0,  # nmol/L/day
-        #kN2OCONS=0.024,  # /day, no O2 correction
+        # kN2OCONS=0.024,  # /day, no O2 correction
         kN2OCONS=0.0,  # /day, corrected for O2
     )
 
@@ -93,7 +93,7 @@ def metadata(key):
         kNH4TONO2=0.524855743,  # nmol/L/day
         kNO2TONO3=0.0,  # nmol/L/day
         kNO3TONO2=0.0,  # nmol/L/day
-        #kN2OCONS=0.024,  # /day, no O2 correction
+        # kN2OCONS=0.024,  # /day, no O2 correction
         kN2OCONS=0.0,  # /day, corrected for O2
     )
 
@@ -110,7 +110,7 @@ def metadata(key):
         kNH4TONO2=0.192410197,  # nmol/L/day
         kNO2TONO3=0.0,  # nmol/L/day
         kNO3TONO2=0.0,  # nmol/L/day
-        #kN2OCONS=0.019,  # /day, no O2 correction
+        # kN2OCONS=0.019,  # /day, no O2 correction
         kN2OCONS=0.019233554,  # /day, corrected for O2
     )
 
@@ -127,7 +127,7 @@ def metadata(key):
         kNH4TONO2=0.453745664,  # nmol/L/day
         kNO2TONO3=0.0,  # nmol/L/day
         kNO3TONO2=0.0,  # nmol/L/day
-        #kN2OCONS=0.0,  # /day, no O2 correction
+        # kN2OCONS=0.0,  # /day, no O2 correction
         kN2OCONS=0.0,  # /day, corrected for O2
     )
 
@@ -144,7 +144,7 @@ def metadata(key):
         kNH4TONO2=0.054284951,  # nmol/L/day
         kNO2TONO3=0.0,  # nmol/L/day
         kNO3TONO2=0.0,  # nmol/L/day
-        #kN2OCONS=0.031,  # /day, no O2 correction
+        # kN2OCONS=0.031,  # /day, no O2 correction
         kN2OCONS=0.0,  # /day, corrected for O2
     )
 
@@ -161,7 +161,7 @@ def metadata(key):
         kNH4TONO2=1.394599328,  # nmol/L/day
         kNO2TONO3=0.0,  # nmol/L/day
         kNO3TONO2=0.0,  # nmol/L/day
-        #kN2OCONS=0.042,  # /day, no O2 correction
+        # kN2OCONS=0.042,  # /day, no O2 correction
         kN2OCONS=0.0,  # /day, corrected for O2
     )
 
@@ -178,7 +178,7 @@ def metadata(key):
         kNH4TONO2=2.209999378,  # nmol/L/day
         kNO2TONO3=27.01023342,  # nmol/L/day
         kNO3TONO2=0.0,  # nmol/L/day
-        #kN2OCONS=0.019,  # /day, no O2 correction
+        # kN2OCONS=0.019,  # /day, no O2 correction
         kN2OCONS=0.0,  # /day, corrected for O2
     )
 
@@ -195,7 +195,7 @@ def metadata(key):
         kNH4TONO2=0.0,  # nmol/L/day
         kNO2TONO3=81.00040564,  # nmol/L/day
         kNO3TONO2=24.32319863,  # nmol/L/day
-        #kN2OCONS=0.056,  # /day, no O2 correction
+        # kN2OCONS=0.056,  # /day, no O2 correction
         kN2OCONS=0.056356302,  # /day, corrected for O2
     )
 
@@ -212,7 +212,7 @@ def metadata(key):
         kNH4TONO2=0.0,  # nmol/L/day
         kNO2TONO3=0.0,  # nmol/L/day
         kNO3TONO2=0.0,  # nmol/L/day
-        #kN2OCONS=0.065,  # /day, no O2 correction
+        # kN2OCONS=0.065,  # /day, no O2 correction
         kN2OCONS=0.065454872,  # /day, corrected for O2
     )
 
@@ -229,7 +229,7 @@ def metadata(key):
         kNH4TONO2=0.0,  # nmol/L/day
         kNO2TONO3=13.05188381,  # nmol/L/day
         kNO3TONO2=33.24400098,  # nmol/L/day
-        #kN2OCONS=0.025,  # /day, no O2 correction
+        # kN2OCONS=0.025,  # /day, no O2 correction
         kN2OCONS=0.024690915,  # /day, corrected for O2
     )
 
@@ -246,7 +246,7 @@ def metadata(key):
         kNH4TONO2=0.514303603,  # nmol/L/day
         kNO2TONO3=0.0,  # nmol/L/day
         kNO3TONO2=0.0,  # nmol/L/day
-        #kN2OCONS=0.075,  # /day, no O2 correction
+        # kN2OCONS=0.075,  # /day, no O2 correction
         kN2OCONS=0.074883646,  # /day, corrected for O2
     )
 
@@ -263,7 +263,7 @@ def metadata(key):
         kNH4TONO2=0.265294945,  # nmol/L/day
         kNO2TONO3=0.0,  # nmol/L/day
         kNO3TONO2=0.0,  # nmol/L/day
-        #kN2OCONS=0.075,  # /day, no O2 correction
+        # kN2OCONS=0.075,  # /day, no O2 correction
         kN2OCONS=0.0,  # /day, corrected for O2
     )
 
@@ -280,7 +280,7 @@ def metadata(key):
         kNH4TONO2=0.0,  # nmol/L/day
         kNO2TONO3=0.0,  # nmol/L/day
         kNO3TONO2=0.0,  # nmol/L/day
-        #kN2OCONS=0.043,  # /day, no O2 correction
+        # kN2OCONS=0.043,  # /day, no O2 correction
         kN2OCONS=0.0,  # /day, corrected for O2
     )
 
@@ -297,7 +297,7 @@ def metadata(key):
         kNH4TONO2=0.0,  # nmol/L/day
         kNO2TONO3=0.0,  # nmol/L/day
         kNO3TONO2=0.0,  # nmol/L/day
-        #kN2OCONS=0.048,  # /day, no O2 correction
+        # kN2OCONS=0.048,  # /day, no O2 correction
         kN2OCONS=0.0,  # /day, corrected for O2
     )
 
@@ -314,7 +314,7 @@ def metadata(key):
         kNH4TONO2=0.87647943,  # nmol/L/day
         kNO2TONO3=0.0,  # nmol/L/day
         kNO3TONO2=0.0,  # nmol/L/day
-        #kN2OCONS=0.0,  # /day, no O2 correction
+        # kN2OCONS=0.0,  # /day, no O2 correction
         kN2OCONS=0.0,  # /day, corrected for O2
     )
 
@@ -331,7 +331,7 @@ def metadata(key):
         kNH4TONO2=4.678976829,  # nmol/L/day
         kNO2TONO3=0.0,  # nmol/L/day
         kNO3TONO2=0.0,  # nmol/L/day
-        #kN2OCONS=0.050,  # /day, no O2 correction
+        # kN2OCONS=0.050,  # /day, no O2 correction
         kN2OCONS=0.050236324,  # /day, corrected for O2
     )
 
@@ -348,7 +348,7 @@ def metadata(key):
         kNH4TONO2=0.574729614,  # nmol/L/day
         kNO2TONO3=0.0,  # nmol/L/day
         kNO3TONO2=19.20078995,  # nmol/L/day
-        #kN2OCONS=0.050,  # /day, no O2 correction
+        # kN2OCONS=0.050,  # /day, no O2 correction
         kN2OCONS=0.050236324,  # /day, corrected for O2
     )
 
@@ -365,7 +365,7 @@ def metadata(key):
         kNH4TONO2=0.0,  # nmol/L/day
         kNO2TONO3=465.3351641,  # nmol/L/day
         kNO3TONO2=0.0,  # nmol/L/day
-        #kN2OCONS=0.0,  # /day, no O2 correction
+        # kN2OCONS=0.0,  # /day, no O2 correction
         kN2OCONS=0.0,  # /day, corrected for O2
     )
 
@@ -382,7 +382,7 @@ def metadata(key):
         kNH4TONO2=0.0,  # nmol/L/day
         kNO2TONO3=0.0,  # nmol/L/day
         kNO3TONO2=10.88213623,  # nmol/L/day
-        #kN2OCONS=0.0,  # /day, no O2 correction
+        # kN2OCONS=0.0,  # /day, no O2 correction
         kN2OCONS=0.0,  # /day, corrected for O2
     )
 
@@ -399,9 +399,8 @@ def metadata(key):
         kNH4TONO2=0.302506387,  # nmol/L/day
         kNO2TONO3=0.0,  # nmol/L/day
         kNO3TONO2=0.0,  # nmol/L/day
-        #kN2OCONS=0.0,  # /day, no O2 correction
+        # kN2OCONS=0.0,  # /day, no O2 correction
         kN2OCONS=0.0,  # /day, corrected for O2
     )
-
 
     return datadict[key]

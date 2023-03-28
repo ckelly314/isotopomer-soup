@@ -11,12 +11,13 @@ from .modelparams import modelparams
 from .tracers import Tracers
 from .isotope_effects import IsotopeEffects
 
+
 def initialize(station=None, feature=None, tracer=None):
 
     stn = station
     ft = feature
     t = tracer
-    bgckey = stn+ft
+    bgckey = stn + ft
 
     ### INITIALIZATION ###
 
@@ -26,11 +27,11 @@ def initialize(station=None, feature=None, tracer=None):
 
     # training data
     path_to_data = datapath()
-    filename = '00_incubationdata.csv'
+    filename = "00_incubationdata.csv"
 
-    gridded_data = grid_data(filename=f'{path_to_data}{filename}',
-                              station=stn, feature=ft, tracer=t, 
-                              T=1000)
+    gridded_data = grid_data(
+        filename=f"{path_to_data}{filename}", station=stn, feature=ft, tracer=t, T=nT
+    )  # 1000)
 
     ### SUBSTRATE CONCENTRATIONS AND RATES OF EXCHANGE ###
     bgc = BioGeoChemistry(bgckey, tracer=t)
@@ -39,6 +40,6 @@ def initialize(station=None, feature=None, tracer=None):
     isos = IsotopeEffects()
 
     ### STATE VARIABLES ###
-    tr = Tracers(nT, bgc, gridded_data) 
+    tr = Tracers(nT, bgc, gridded_data)
 
     return gridded_data, bgc, isos, tr, params

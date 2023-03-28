@@ -58,15 +58,21 @@ def costfxn(
         ]  # we'll use the indices array to slice the model output numpy arrays
 
     except IndexError:  # if a timepoint 2 does not exist, indices are just timepoints 0 & 1
-        #print("No t2 available from incubation data") # this print statement might be helpful but gets annoying
+        # print("No t2 available from incubation data") # this print statement might be helpful but gets annoying
         indices = [int(t0["adjusted_timepoint"]), int(t1["adjusted_timepoint"])]
 
     # compute difference of modeled and measured isotopomers at each timepoint
-    error44 = modeled_44[indices] - np.array(trainingdata[["44N2O"]])
-    # multiply by 1000 since rare isotopocules are typically 2-3 orders of magnitude lower in concentration than 44N2o
-    error45a = (modeled_45a[indices] - np.array(trainingdata[["45N2Oa"]]))*1000
-    error45b = (modeled_45b[indices] - np.array(trainingdata[["45N2Ob"]]))*1000
-    error46 = (modeled_46[indices] - np.array(trainingdata[["46N2O"]]))*1000
+    # multiply 1000 since concentrations of isotopocules are ~1,000x smaller
+    error44 = modeled_44[indices] - np.array(trainingdata[["44N2O"]])  # *weights44
+    error45a = (
+        modeled_45a[indices] - np.array(trainingdata[["45N2Oa"]])
+    ) * 1000  # *weights45a
+    error45b = (
+        modeled_45b[indices] - np.array(trainingdata[["45N2Ob"]])
+    ) * 1000  # weights45b
+    error46 = (
+        modeled_46[indices] - np.array(trainingdata[["46N2O"]])
+    ) * 1000  # weights46
 
     # condense error arrays into an RMSE and return array of RMSE's
     errors = np.array([rmse(error44), rmse(error45a), rmse(error45b), rmse(error46)])

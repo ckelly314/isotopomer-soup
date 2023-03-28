@@ -92,7 +92,7 @@ def x0_v1(station=None, feature=None, key=None):
     # run model for 15NO3- experiment
     bgc = BioGeoChemistry(key, tracer="NO3-")
     tr = Tracers(nT, bgc, data)
-    tracers = modelv1(x, bgc, isos, tr, (dt,nT, times))
+    tracers = modelv1(x, bgc, isos, tr, (dt, nT, times))
 
     # calculations
     data["Incubation_time_days"] = (
@@ -128,7 +128,7 @@ def x0_v1(station=None, feature=None, key=None):
     # run model for 15NO2- experiment
     bgc = BioGeoChemistry(key, tracer="NO2-")
     tr = Tracers(nT, bgc, data)
-    tracers = modelv1(x, bgc, isos, tr, (dt,nT, times))
+    tracers = modelv1(x, bgc, isos, tr, (dt, nT, times))
 
     # calculations
     data["Incubation_time_days"] = (
@@ -172,7 +172,7 @@ def x0_v1(station=None, feature=None, key=None):
     # we'll use the rates of production of 45N2Oa and 45N2Ob in the 15NO2- experiment
     p45a = max(0, stats.linregress(data.Incubation_time_days, data["45N2Oa"]).slope)
     p45b = max(0, stats.linregress(data.Incubation_time_days, data["45N2Ob"]).slope)
-    p45average = (p45a + p45b)
+    p45average = p45a + p45b
 
     p1, p2, p3, p4 = binomial(tracers.afno2[1:], tracers.afnh4[1:])
 
@@ -220,7 +220,6 @@ def x0_v1(station=None, feature=None, key=None):
     print(f"estimated k for hybrid pathway #1 from NH2OH & NO2-: {kestimate_hybrid5}")
     print(f"estimated k for hybrid pathway #2 from NH2OH & NO2-: {kestimate_hybrid6}")
 
-
     # function returns:
     return [
         kestimateNH4,
@@ -232,5 +231,5 @@ def x0_v1(station=None, feature=None, key=None):
         kestimate_hybrid3,
         kestimate_hybrid4,
         kestimate_hybrid5,
-        kestimate_hybrid6
+        kestimate_hybrid6,
     ]

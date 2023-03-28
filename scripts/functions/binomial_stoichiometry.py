@@ -31,12 +31,13 @@ def binomial_stoichiometry(afNO, afNH2OH):
     p44 = float or numpy array containing probabilit(ies) of forming 44N2O
     """
 
-    p46 = 1./3 * afNO**2 + 2./3 * afNO * afNH2OH
-    p45a = 2./3 * afNO * (1 - afNH2OH) + 1./3 * afNO * (1 - afNO)
-    p45b = 2./3 * (1 - afNO) * afNH2OH + 1./3 * afNO * (1 - afNO)
-    p44 = 1./3 * ((1 - afNO)**2) + 2./3 * (1 - afNO) * (1 - afNH2OH)
+    p46 = 1.0 / 3 * afNO ** 2 + 2.0 / 3 * afNO * afNH2OH
+    p45a = 2.0 / 3 * afNO * (1 - afNH2OH) + 1.0 / 3 * afNO * (1 - afNO)
+    p45b = 2.0 / 3 * (1 - afNO) * afNH2OH + 1.0 / 3 * afNO * (1 - afNO)
+    p44 = 1.0 / 3 * ((1 - afNO) ** 2) + 2.0 / 3 * (1 - afNO) * (1 - afNH2OH)
 
     return p46, p45a, p45b, p44
 
-if __name__=="__main__":
+
+if __name__ == "__main__":
     print(sum(binomial_stoichiometry(0.99, 0.3)))

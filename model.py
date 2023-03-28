@@ -8,7 +8,7 @@ import numpy as np
 
 #sc.runmodelv5("PS2", "Base of ODZ")
 
-sc.runmodelv5("PS2", "Deep ODZ core", weights = np.array([0.45, 0.1, 0.45]))
+sc.runmodelv5("PS2", "Deep ODZ core")#, weights = np.array([0.45, 0.1, 0.45]))
 
 #sc.runmodelv5("PS2", "Interface", weights = np.array([0.45, 0.1, 0.45]))
 

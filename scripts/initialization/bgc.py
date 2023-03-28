@@ -23,7 +23,7 @@ class BioGeoChemistry:
     tracer = "NH4+", "NO2-", or "NO3-"
 
     Outputs:
-    BioGeoChemistry() = object containing initial substrate concnetrations
+    BioGeoChemistry() = object containing initial substrate concentrations
     and rates.
     """
 
@@ -59,16 +59,16 @@ class BioGeoChemistry:
 
         ### SPIKE & CARRIER INJECTIONS ###
 
-        self.NH4_carrier = 0.58 * 1000  # nmol/L, median of headspace concentrations
-        self.NO2_carrier = 1.83 * 1000  # nmol/L, median of headspace concentrations
-        self.NO3_carrier = 0.0  # nmol/L
+        self.NH4_carrier = 0.510 * 1000  # nmol/L
+        self.NO2_carrier = 1.010 * 1000  # nmol/L
+        self.NO3_carrier = 0.000  # nmol/L
 
-        self.R15std = 0.00367647  # air N2
+        self.R15std = 0.0036765  # [De Bièvre et al., 1996]
         self.af_carrier = self.R15std / (1 + self.R15std)
 
-        self.NH4_spike = 0.69 * 1000  # nmol/L, median of headspace concentrations
-        self.NO2_spike = 4.45 * 1000  # nmol/L, median of headspace concentrations
-        self.NO3_spike = 1.00 * 1000  # nmol/L
+        self.NH4_spike = 0.501 * 1000  # nmol/L
+        self.NO2_spike = 5.000 * 1000  # nmol/L
+        self.NO3_spike = 1.000 * 1000  # nmol/L
 
         self.af_spike = 0.99999999
         _, self.d15N_spike = convert_af(self.af_spike)
@@ -160,16 +160,16 @@ class BioGeoChemistry:
 
         ### SUBSTRATE EXCHANGE ###
 
-        #source: Martin & Casciotti (2016), "Nitrogen and oxygen isotopic fractionation during microbial nitrite reduction"
-        #self.kNO2TONO = 41.760 # /day, Cu-NIR, heterotrophic denitrifying bacteria
-        #self.kNO2TONO = 28.80 # /day, Fe-NIR, heterotrophic denitrifying bacteria
-        
+        # source: Martin & Casciotti (2016), "Nitrogen and oxygen isotopic fractionation during microbial nitrite reduction"
+        # self.kNO2TONO = 41.760 # /day, Cu-NIR, heterotrophic denitrifying bacteria
+        # self.kNO2TONO = 28.80 # /day, Fe-NIR, heterotrophic denitrifying bacteria
+
         # source: Ward et al. (2009), "Denitrification as the dominant nitrogen loss process in the Arabian Sea"
-        #self.kNO2TONO = 0.00016 # /day, minimum
-        self.kNO2TONO = 0.017 # /day, maximum
+        # self.kNO2TONO = 0.00016 # /day, minimum
+        self.kNO2TONO = 0.017  # /day, maximum
 
         # source: Bulow et al. (2010), "Denitrification exceeds anammox... "
-        #self.kNO2TONO = 0.0028 # /day, average value
+        # self.kNO2TONO = 0.0028 # /day, average value
 
         try:
             self.kNH4TONO2 = data.kNH4TONO2 / (
@@ -185,7 +185,9 @@ class BioGeoChemistry:
 
         ### N2O CONSUMPTION ###
 
-        self.kN2OCONS = data.kN2OCONS  # /day, source: Sun et al. (2020), "Microbial N2O consumption in and above marine N2O production hotspots"
+        self.kN2OCONS = (
+            data.kN2OCONS
+        )  # /day, source: Sun et al. (2020), "Microbial N2O consumption in and above marine N2O production hotspots"
 
     def __repr__(self):
 
