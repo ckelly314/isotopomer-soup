@@ -1,13 +1,13 @@
 #!/bin/bash
 #
 #SBATCH --job-name=montecarlo # give a meaningful name.
-#SBATCH --error=montecarlo.err
-#SBATCH --out=montecarlo-1-%j.out
+#SBATCH --error=sherlock_output/montecarlo.err
+#SBATCH --out=sherlock_output/montecarlo-1-%j.out
 #SBATCH -N 1 -n 1 # How many nodes and cores do you need?
 #SBATCH --mem=5G # How much memory?
 #SBATCH --mail-type=END,FAIL
 #SBATCH --mail-user=clkelly@stanford.edu
-#SBATCH --time=3:00:00 # how much time?
+#SBATCH --time=30:00 # how much time?
 #
 
 ml reset
