@@ -32,6 +32,7 @@ def runmontecarlo(station, feature, iters, weights=None):
     output: Pandas DataFrame with one row per iteration (model solution)
     """
 
+    print(f"{station} {feature} monte carlo simulation initiated")
     ### KEYWORDS ###
     stn = station
     ft = feature
@@ -181,10 +182,11 @@ def runmontecarlo(station, feature, iters, weights=None):
         )
 
         # summarize the result - probably want to take out some of these print statements
+        print(f"simulation {i+1}/{iters} complete. Execution time:{et - st}")
         print("Status : %s" % result["message"])
-        print("Total Evaluations: %d" % result["nfev"])
-        print("Execution time:", (et - st), "seconds")  # get the execution time
-        print("Solution: f(%s) = %.5f" % (solution, evaluation))
+        #print("Total Evaluations: %d" % result["nfev"])
+        #print(f"Execution time:", (et - st), "seconds")  # get the execution time
+        #print("Solution: f(%s) = %.5f" % (solution, evaluation))
 
         # run model with solution from this iteration and process output into mean rates
         tracersNH4 = modelv5(result.x, bgcNH4, isos, trNH4, params)

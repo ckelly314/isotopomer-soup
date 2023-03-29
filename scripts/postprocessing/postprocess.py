@@ -315,11 +315,11 @@ def postprocess(bgc, isos, tracers, x, model):
             * (tracers.no2_14 + tracers.no2_15)
         )
 
-        print(f"Nit. (nM/day): {output.nitrification.mean()}")
-        print(f"Denit. from NO2- (nM/day): {output.denitno2.mean()}")
-        print(f"Denit. from NO3- (nM/day): {output.denitno3.mean()}")
-        print(f"Hybrid 2 (nM/day): {output.hybrid2.mean()}")
-        print(f"f: {f}")
+        #print(f"Nit. (nM/day): {output.nitrification.mean()}")
+        #print(f"Denit. from NO2- (nM/day): {output.denitno2.mean()}")
+        #print(f"Denit. from NO3- (nM/day): {output.denitno3.mean()}")
+        #print(f"Hybrid 2 (nM/day): {output.hybrid2.mean()}")
+        #print(f"f: {f}")
 
     output["Incubation_time_hrs"] = output.index / 1000 * 24
 
