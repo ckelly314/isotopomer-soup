@@ -253,7 +253,7 @@ def runmontecarlo(station, feature, iters, weights=None):
         return evaluation
 
     ### START ITERATING ###
-    Parallel(n_jobs = 5)(delayed(simulation)(i) for i in range(iters))
+    Parallel(n_jobs = 20)(delayed(simulation)(i) for i in range(iters))
 
     et = time.time()
    
