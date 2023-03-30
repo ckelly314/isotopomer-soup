@@ -3,7 +3,7 @@
 #SBATCH --job-name=montecarlo # give a meaningful name.
 #SBATCH --error=sherlock_output/montecarlo.err
 #SBATCH --out=sherlock_output/montecarlo-1-%j.out
-#SBATCH -N 1 -n 1 # How many nodes and cores do you need?
+#SBATCH -N 1 -n 2 # How many nodes and cores do you need?
 #SBATCH --mem=5G # How much memory?
 #SBATCH --mail-type=END,FAIL
 #SBATCH --mail-user=clkelly@stanford.edu
