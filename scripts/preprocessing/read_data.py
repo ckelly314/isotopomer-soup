@@ -86,7 +86,7 @@ def grid_data(filename=None, station=None, feature=None, tracer=None, T=None):
     gridded_data[
         "x"
     ] = (  # time(timepoints) = time(hrs) * (1 day/24 hrs) * (T timepoints/day)
-        gridded_data.Incubation_time_hrs / 24 * T
+        gridded_data.Incubation_time_hrs / 24 * 1000
     )
     gridded_data[
         "timepoint"
@@ -99,11 +99,11 @@ def grid_data(filename=None, station=None, feature=None, tracer=None, T=None):
         gridded_data["timepoint"] - gridded_data["timepoint"][0]
     )
 
-    gridded_data = gridded_data.fillna(
-        method="bfill"
-    )  # does the same thing as the if-statement below
+    #gridded_data = gridded_data.fillna(
+    #    method="bfill"
+    #)  # does the same thing as the if-statement below
 
-    """
+
     if (np.isnan(gridded_data['44N2O'][0])==True)&(np.isnan(gridded_data['44N2O'][1])==False):
         gridded_data['44N2O'][0] = gridded_data['44N2O'][1]
         gridded_data['45N2Oa'][0] = gridded_data['45N2Oa'][1]
@@ -114,7 +114,7 @@ def grid_data(filename=None, station=None, feature=None, tracer=None, T=None):
         gridded_data['45N2Oa'][0] = gridded_data['45N2Oa'][2]
         gridded_data['45N2Ob'][0] = gridded_data['45N2Ob'][2]
         gridded_data['46N2O'][0] = gridded_data['46N2O'][2]
-    """
+
 
     return gridded_data
 
