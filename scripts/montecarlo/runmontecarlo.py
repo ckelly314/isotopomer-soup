@@ -29,8 +29,9 @@ def runmontecarlo(station, feature, iters, weights=None):
     output: Pandas DataFrame with one row per iteration (model solution)
     """
 
-    print(f"{station} {feature} monte carlo simulation initiated")
     st = time.time()
+    print(f"{station} {feature} monte carlo simulation initiated")
+    
     ### KEYWORDS ###
     stn = station
     ft = feature
@@ -40,6 +41,13 @@ def runmontecarlo(station, feature, iters, weights=None):
     # in some cases, these should be adjusted to ensure model-data fit for each tracer experiment
     if weights is None:
         weights = np.array([1.0 / 3, 1.0 / 3, 1.0 / 3])
+
+    ### SET UP AN EMPTY CSV FILE TO SAVE SIMULATIONS TO ###
+
+    pd.DataFrame([], columns = {'Key', 'Nitrification (nM/day)', 'Denit fromNO2- (nM/day)',
+        'Denit from NO3- (nM/day)', 'Hybrid2 (nM/day)', 'Station', 'Feature',
+        'iteration', 'cost', 'f',
+        'weightNH4', 'weightNO2', 'weightNO3'}).set_index("Key").to_csv(f"{datapath()}/{stn}{ft}.csv")
 
     ### INITIALIZE MEAN STATES FOR EACH TRACER EXPERIMENT ###
 
@@ -246,9 +254,9 @@ def runmontecarlo(station, feature, iters, weights=None):
 
         # add saveout to output df
         saveout = saveout.set_index("Key")
-        output = pd.read_csv(f"{datapath()}montecarlo.csv", index_col = "Key")
+        output = pd.read_csv(f"{datapath()}/{stn}{ft}.csv", index_col = "Key")
         output = pd.concat([output, saveout])
-        output.to_csv(f"{datapath()}montecarlo.csv")
+        output.to_csv(f"{datapath()}/{stn}{ft}.csv")
 
         return evaluation
 
