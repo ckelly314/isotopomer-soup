@@ -177,7 +177,7 @@ def runmontecarlo(station, feature, iters, weights=None):
         # perform the search with intelligently selected x0
         # increasing option "fatol" from factory setting of 0.0001 to 0.1 reduces the amount of time to solve 
         result = minimize(
-            modelv5objective, x, args=args, method="nelder-mead", bounds=bnds, options={'fatol': 0.1}
+            modelv5objective, x, args=args, method="nelder-mead", bounds=bnds, options={'fatol': 0.01}
         )  # , options={'maxfev' : 500, 'fatol': 0.1})
 
         # evaluate solution
@@ -253,7 +253,7 @@ def runmontecarlo(station, feature, iters, weights=None):
         return evaluation
 
     ### START ITERATING ###
-    Parallel(n_jobs = 5)(delayed(simulation)(i) for i in range(iters))
+    Parallel(n_jobs = 2)(delayed(simulation)(i) for i in range(iters))
 
     et = time.time()
    
