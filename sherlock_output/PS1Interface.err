@@ -1,0 +1,47 @@
+Running "module reset". Resetting modules to system default. The following $MODULEPATH directories have been removed: None
+joblib.externals.loky.process_executor._RemoteTraceback: 
+"""
+Traceback (most recent call last):
+  File "/home/users/clkelly/.local/lib/python3.9/site-packages/joblib/externals/loky/process_executor.py", line 428, in _process_worker
+    r = call_item()
+  File "/home/users/clkelly/.local/lib/python3.9/site-packages/joblib/externals/loky/process_executor.py", line 275, in __call__
+    return self.fn(*self.args, **self.kwargs)
+  File "/home/users/clkelly/.local/lib/python3.9/site-packages/joblib/_parallel_backends.py", line 620, in __call__
+    return self.func(*args, **kwargs)
+  File "/home/users/clkelly/.local/lib/python3.9/site-packages/joblib/parallel.py", line 288, in __call__
+    return [func(*args, **kwargs)
+  File "/home/users/clkelly/.local/lib/python3.9/site-packages/joblib/parallel.py", line 288, in <listcomp>
+    return [func(*args, **kwargs)
+  File "/home/users/clkelly/isotopomer-soup/scripts/montecarlo/runmontecarlo.py", line 187, in simulation
+    result = minimize(
+  File "/home/users/clkelly/.local/lib/python3.9/site-packages/scipy/optimize/_minimize.py", line 611, in minimize
+    return _minimize_neldermead(fun, x0, args, callback, bounds=bounds,
+  File "/home/users/clkelly/.local/lib/python3.9/site-packages/scipy/optimize/optimize.py", line 750, in _minimize_neldermead
+    fsim[k] = func(sim[k])
+  File "/home/users/clkelly/.local/lib/python3.9/site-packages/scipy/optimize/optimize.py", line 464, in function_wrapper
+    return function(np.copy(x), *(wrapper_args + args))
+  File "/home/users/clkelly/isotopomer-soup/scripts/optimization/modelv5objective.py", line 34, in modelv5objective
+    costNH4 = costfxn(
+  File "/home/users/clkelly/isotopomer-soup/scripts/optimization/costfxn.py", line 66, in costfxn
+    error44 = modeled_44[indices] - np.array(trainingdata[["44N2O"]])  # *weights44
+ValueError: operands could not be broadcast together with shapes (3,1) (4,1) 
+"""
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/users/clkelly/isotopomer-soup/PS1Interface.py", line 4, in <module>
+    sc.runmontecarlo("PS1", "Interface", 100)
+  File "/home/users/clkelly/isotopomer-soup/scripts/montecarlo/runmontecarlo.py", line 264, in runmontecarlo
+    Parallel(n_jobs = 20)(delayed(simulation)(i) for i in range(iters))
+  File "/home/users/clkelly/.local/lib/python3.9/site-packages/joblib/parallel.py", line 1098, in __call__
+    self.retrieve()
+  File "/home/users/clkelly/.local/lib/python3.9/site-packages/joblib/parallel.py", line 975, in retrieve
+    self._output.extend(job.get(timeout=self.timeout))
+  File "/home/users/clkelly/.local/lib/python3.9/site-packages/joblib/_parallel_backends.py", line 567, in wrap_future_result
+    return future.result(timeout=timeout)
+  File "/share/software/user/open/python/3.9.0/lib/python3.9/concurrent/futures/_base.py", line 440, in result
+    return self.__get_result()
+  File "/share/software/user/open/python/3.9.0/lib/python3.9/concurrent/futures/_base.py", line 389, in __get_result
+    raise self._exception
+ValueError: operands could not be broadcast together with shapes (3,1) (4,1) 
