@@ -66,7 +66,7 @@ def modelv5objective(
 
     cost = np.array([costNH4, costNO2, costNO3])
 
-    print(cost * weights)  # these are the weights for each tracer experiment
+    #print(cost * weights)  # these are the weights for each tracer experiment
 
     cost = np.sum(cost * weights)
 
