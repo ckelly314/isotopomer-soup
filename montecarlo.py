@@ -1,4 +1,4 @@
 import scripts as sc
 import numpy as np
 
-sc.runmontecarlo("PS2", "Deep ODZ core", 500, weights = np.array([0.45, 0.1, 0.45]))
+sc.runmontecarlo("PS2", "Deep ODZ core", 2, weights = np.array([0.45, 0.1, 0.45]))
