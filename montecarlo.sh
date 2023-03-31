@@ -4,7 +4,7 @@
 #SBATCH --error=sherlock_output/montecarlo.err
 #SBATCH --out=sherlock_output/montecarlo-1-%j.out
 #SBATCH -N 1 -n 20 # How many nodes and cores do you need?
-#SBATCH --mem=8G # How much memory?
+#SBATCH --mem=5G # How much memory?
 #SBATCH --mail-type=END,FAIL
 #SBATCH --mail-user=clkelly@stanford.edu
 #SBATCH --time=3:00:00 # how much time?
