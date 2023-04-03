@@ -184,7 +184,7 @@ def runmodelv5(station, feature, weights=None):
         feature=ft,
         tracer="NH4+",
         modeloutput=outputNH4,
-        filename=f"Figures/modelv5/{stn}{ft}NH4+modelv5.pdf",
+        filename=f"figures/modelv5/{stn}{ft}NH4+modelv5.pdf",
     )
 
     scatter_plot(
@@ -193,7 +193,7 @@ def runmodelv5(station, feature, weights=None):
         feature=ft,
         tracer="NO2-",
         modeloutput=outputNO2,
-        filename=f"Figures/modelv5/{stn}{ft}NO2-modelv5.pdf",
+        filename=f"figures/modelv5/{stn}{ft}NO2-modelv5.pdf",
     )
 
     scatter_plot(
@@ -202,5 +202,5 @@ def runmodelv5(station, feature, weights=None):
         feature=ft,
         tracer="NO3-",
         modeloutput=outputNO3,
-        filename=f"Figures/modelv5/{stn}{ft}NO3-modelv5.pdf",
+        filename=f"figures/modelv5/{stn}{ft}NO3-modelv5.pdf",
     )
