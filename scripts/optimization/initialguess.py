@@ -75,7 +75,7 @@ def x0(station=None, feature=None, key=None):
         p46NH4 / probabilityNH4 / concentrationNH4
     )  # take the median value of the resulting array
 
-    #print(f"estimated k for N2O production from NH4+: {kestimateNH4}")
+    # print(f"estimated k for N2O production from NH4+: {kestimateNH4}")
 
     ### 2. estimate k for N2O production from NO3- ###
 
@@ -111,7 +111,7 @@ def x0(station=None, feature=None, key=None):
         p46NO3 / probabilityNO3 / concentrationNO3
     )  # take the median value of the resulting array
 
-    #print(f"estimated k for N2O production from NO3-: {kestimateNO3}")
+    # print(f"estimated k for N2O production from NO3-: {kestimateNO3}")
 
     ### 3. estimate k for N2O production from NO2- ###
 
@@ -147,7 +147,7 @@ def x0(station=None, feature=None, key=None):
         p46NO2 / probabilityNO2 / concentrationNO2
     )  # take the median value of the resulting array
 
-    #print(f"estimated k for N2O production from NO2-: {kestimateNO2}")
+    # print(f"estimated k for N2O production from NO2-: {kestimateNO2}")
 
     ### 4. estimate k for N2O production from NO ###
 
@@ -164,7 +164,7 @@ def x0(station=None, feature=None, key=None):
         p46NO2 / probabilityNO / concentrationNO
     )  # take the median value of the resulting array
 
-    #print(f"estimated k for N2O production from NO: {kestimateNO}")
+    # print(f"estimated k for N2O production from NO: {kestimateNO}")
 
     ### 5. estimate k values for hybrid production from NO2- & NH4+ ###
 
@@ -210,8 +210,8 @@ def x0(station=None, feature=None, key=None):
     kestimate_hybrid1 = (kestimate_hybrid1NO2 + kestimate_hybrid1NH4) / 2
     kestimate_hybrid2 = (kestimate_hybrid2NO2 + kestimate_hybrid2NH4) / 2
 
-    #print(f"estimated k for hybrid pathway #1 from NH4+ & NO2-: {kestimate_hybrid1}")
-    #print(f"estimated k for hybrid pathway #2 from NH4+ & NO2-: {kestimate_hybrid2}")
+    # print(f"estimated k for hybrid pathway #1 from NH4+ & NO2-: {kestimate_hybrid1}")
+    # print(f"estimated k for hybrid pathway #2 from NH4+ & NO2-: {kestimate_hybrid2}")
 
     ### 6. estimate k values for hybrid production from NO & NH2OH ###
 
@@ -243,8 +243,8 @@ def x0(station=None, feature=None, key=None):
     kestimate_hybrid3 = (kestimate_hybrid3NO2 + kestimate_hybrid3NH4) / 2
     kestimate_hybrid4 = (kestimate_hybrid4NO2 + kestimate_hybrid4NH4) / 2
 
-    #print(f"estimated k for hybrid pathway #1 from NH2OH & NO: {kestimate_hybrid3}")
-    #print(f"estimated k for hybrid pathway #2 from NH2OH & NO: {kestimate_hybrid4}")
+    # print(f"estimated k for hybrid pathway #1 from NH2OH & NO: {kestimate_hybrid3}")
+    # print(f"estimated k for hybrid pathway #2 from NH2OH & NO: {kestimate_hybrid4}")
 
     ### 7. estimate k values for hybrid production from NO2- & NH2OH ###
 
@@ -272,8 +272,8 @@ def x0(station=None, feature=None, key=None):
     kestimate_hybrid5 = (kestimate_hybrid5NO2 + kestimate_hybrid5NH4) / 2
     kestimate_hybrid6 = (kestimate_hybrid6NO2 + kestimate_hybrid6NH4) / 2
 
-    #print(f"estimated k for hybrid pathway #1 from NH2OH & NO2-: {kestimate_hybrid5}")
-    #print(f"estimated k for hybrid pathway #2 from NH2OH & NO2-: {kestimate_hybrid6}")
+    # print(f"estimated k for hybrid pathway #1 from NH2OH & NO2-: {kestimate_hybrid5}")
+    # print(f"estimated k for hybrid pathway #2 from NH2OH & NO2-: {kestimate_hybrid6}")
 
     # function returns:
     return [

@@ -99,22 +99,24 @@ def grid_data(filename=None, station=None, feature=None, tracer=None, T=None):
         gridded_data["timepoint"] - gridded_data["timepoint"][0]
     )
 
-    #gridded_data = gridded_data.fillna(
+    # gridded_data = gridded_data.fillna(
     #    method="bfill"
-    #)  # does the same thing as the if-statement below
+    # )  # does the same thing as the if-statement below
 
-
-    if (np.isnan(gridded_data['44N2O'][0])==True)&(np.isnan(gridded_data['44N2O'][1])==False):
-        gridded_data['44N2O'][0] = gridded_data['44N2O'][1]
-        gridded_data['45N2Oa'][0] = gridded_data['45N2Oa'][1]
-        gridded_data['45N2Ob'][0] = gridded_data['45N2Ob'][1]
-        gridded_data['46N2O'][0] = gridded_data['46N2O'][1]
-    elif (np.isnan(gridded_data['44N2O'][0])==True)&(np.isnan(gridded_data['44N2O'][1])==True):
-        gridded_data['44N2O'][0] = gridded_data['44N2O'][2]
-        gridded_data['45N2Oa'][0] = gridded_data['45N2Oa'][2]
-        gridded_data['45N2Ob'][0] = gridded_data['45N2Ob'][2]
-        gridded_data['46N2O'][0] = gridded_data['46N2O'][2]
-
+    if (np.isnan(gridded_data["44N2O"][0]) == True) & (
+        np.isnan(gridded_data["44N2O"][1]) == False
+    ):
+        gridded_data["44N2O"][0] = gridded_data["44N2O"][1]
+        gridded_data["45N2Oa"][0] = gridded_data["45N2Oa"][1]
+        gridded_data["45N2Ob"][0] = gridded_data["45N2Ob"][1]
+        gridded_data["46N2O"][0] = gridded_data["46N2O"][1]
+    elif (np.isnan(gridded_data["44N2O"][0]) == True) & (
+        np.isnan(gridded_data["44N2O"][1]) == True
+    ):
+        gridded_data["44N2O"][0] = gridded_data["44N2O"][2]
+        gridded_data["45N2Oa"][0] = gridded_data["45N2Oa"][2]
+        gridded_data["45N2Ob"][0] = gridded_data["45N2Ob"][2]
+        gridded_data["46N2O"][0] = gridded_data["46N2O"][2]
 
     return gridded_data
 

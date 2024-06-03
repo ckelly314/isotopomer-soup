@@ -9,12 +9,15 @@ for each iteration.
 import pandas as pd
 import numpy as np
 import time  # for calculating execution time
-from scipy.optimize import minimize # use for nelder-mead optimization of a convex function
-from joblib import Parallel, delayed # parallel processing for multiple simulations
+from scipy.optimize import (
+    minimize,
+)  # use for nelder-mead optimization of a convex function
+from joblib import Parallel, delayed  # parallel processing for multiple simulations
 
 from .genmontecarlo import genmontecarlo
 
 from .. import *
+
 
 def runmontecarlo(station, feature, iters, weights=None):
     """
@@ -31,7 +34,7 @@ def runmontecarlo(station, feature, iters, weights=None):
 
     st = time.time()
     print(f"{station} {feature} monte carlo simulation initiated")
-    
+
     ### KEYWORDS ###
     stn = station
     ft = feature
@@ -44,10 +47,24 @@ def runmontecarlo(station, feature, iters, weights=None):
 
     ### SET UP AN EMPTY CSV FILE TO SAVE SIMULATIONS TO ###
 
-    pd.DataFrame([], columns = {'Key', 'Nitrification (nM/day)', 'Denit fromNO2- (nM/day)',
-        'Denit from NO3- (nM/day)', 'Hybrid2 (nM/day)', 'Station', 'Feature',
-        'iteration', 'cost', 'f',
-        'weightNH4', 'weightNO2', 'weightNO3'}).set_index("Key").to_csv(f"{datapath()}/{stn}{ft}.csv")
+    pd.DataFrame(
+        [],
+        columns={
+            "Key",
+            "Nitrification (nM/day)",
+            "Denit fromNO2- (nM/day)",
+            "Denit from NO3- (nM/day)",
+            "Hybrid2 (nM/day)",
+            "Station",
+            "Feature",
+            "iteration",
+            "cost",
+            "f",
+            "weightNH4",
+            "weightNO2",
+            "weightNO3",
+        },
+    ).set_index("Key").to_csv(f"{datapath()}/{stn}{ft}.csv")
 
     ### INITIALIZE MEAN STATES FOR EACH TRACER EXPERIMENT ###
 
@@ -183,9 +200,14 @@ def runmontecarlo(station, feature, iters, weights=None):
         )
 
         # perform the search with intelligently selected x0
-        # increasing option "fatol" from factory setting of 0.0001 to 0.1 reduces the amount of time to solve 
+        # increasing option "fatol" from factory setting of 0.0001 to 0.1 reduces the amount of time to solve
         result = minimize(
-            modelv5objective, x, args=args, method="nelder-mead", bounds=bnds, options={'fatol': 0.01}
+            modelv5objective,
+            x,
+            args=args,
+            method="nelder-mead",
+            bounds=bnds,
+            options={"fatol": 0.01},
         )  # , options={'maxfev' : 500, 'fatol': 0.1})
 
         # evaluate solution
@@ -209,9 +231,9 @@ def runmontecarlo(station, feature, iters, weights=None):
         # summarize the result - probably want to take out some of these print statements
         print(f"simulation {i+1}/{iters} complete.")
         print("Status : %s" % result["message"])
-        #print("Total Evaluations: %d" % result["nfev"])
-        #print(f"Execution time:", (et - st), "seconds")  # get the execution time
-        #print("Solution: f(%s) = %.5f" % (solution, evaluation))
+        # print("Total Evaluations: %d" % result["nfev"])
+        # print(f"Execution time:", (et - st), "seconds")  # get the execution time
+        # print("Solution: f(%s) = %.5f" % (solution, evaluation))
 
         # run model with solution from this iteration and process output into mean rates
         tracersNH4 = modelv5(result.x, bgcNH4, isos, trNH4, params)
@@ -254,16 +276,16 @@ def runmontecarlo(station, feature, iters, weights=None):
 
         # add saveout to output df
         saveout = saveout.set_index("Key")
-        output = pd.read_csv(f"{datapath()}/{stn}{ft}.csv", index_col = "Key")
+        output = pd.read_csv(f"{datapath()}/{stn}{ft}.csv", index_col="Key")
         output = pd.concat([output, saveout])
         output.to_csv(f"{datapath()}/{stn}{ft}.csv")
 
         return evaluation
 
     ### START ITERATING ###
-    Parallel(n_jobs = 20)(delayed(simulation)(i) for i in range(iters))
+    Parallel(n_jobs=20)(delayed(simulation)(i) for i in range(iters))
 
     et = time.time()
-   
-    #outputdf.to_csv(f"{datapath()}montecarlo.csv")  # save results from this simulation
+
+    # outputdf.to_csv(f"{datapath()}montecarlo.csv")  # save results from this simulation
     print(f"monte carlo simulation terminated. Execution time:{et - st}")

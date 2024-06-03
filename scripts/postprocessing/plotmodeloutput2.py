@@ -43,10 +43,14 @@ def scatter_plot(
     fig, axes = plt.subplots(2, 2, figsize=(7, 6))
 
     ax = axes[0, 0]
-    ax.text(0.05, 0.05, "(a)",
-         horizontalalignment = "left",
-         verticalalignment = "bottom",
-        transform = ax.transAxes)
+    ax.text(
+        0.05,
+        0.05,
+        "(a)",
+        horizontalalignment="left",
+        verticalalignment="bottom",
+        transform=ax.transAxes,
+    )
 
     ax.plot(
         modeloutput["Incubation_time_hrs"],
@@ -67,10 +71,14 @@ def scatter_plot(
     ax.set_ylabel(r"$^{44}N_2O$ (nM)")
 
     ax = axes[0, 1]
-    ax.text(0.95, 0.05, "(b)",
-         horizontalalignment = "right",
-         verticalalignment = "bottom",
-        transform = ax.transAxes)
+    ax.text(
+        0.95,
+        0.05,
+        "(b)",
+        horizontalalignment="right",
+        verticalalignment="bottom",
+        transform=ax.transAxes,
+    )
 
     ax.plot(
         modeloutput["Incubation_time_hrs"],
@@ -91,10 +99,14 @@ def scatter_plot(
     ax.set_ylabel(r"$^{46}N_2O$ (nM)")
 
     ax = axes[1, 0]
-    ax.text(0.95, 0.05, "(c)",
-         horizontalalignment = "right",
-         verticalalignment = "bottom",
-        transform = ax.transAxes)
+    ax.text(
+        0.95,
+        0.05,
+        "(c)",
+        horizontalalignment="right",
+        verticalalignment="bottom",
+        transform=ax.transAxes,
+    )
 
     ax.plot(
         modeloutput["Incubation_time_hrs"],
@@ -113,13 +125,17 @@ def scatter_plot(
 
     ax.set_xlabel("Incubation time (hrs)")
     ax.set_ylabel(r"$^{45}N_2O^{\alpha}$ (nM)")
-    ax.legend(fancybox = True, framealpha = 1.0)
+    ax.legend(fancybox=True, framealpha=1.0)
 
     ax = axes[1, 1]
-    ax.text(0.95, 0.05, "(d)",
-         horizontalalignment = "right",
-         verticalalignment = "bottom",
-        transform = ax.transAxes)
+    ax.text(
+        0.95,
+        0.05,
+        "(d)",
+        horizontalalignment="right",
+        verticalalignment="bottom",
+        transform=ax.transAxes,
+    )
 
     ax.plot(
         modeloutput["Incubation_time_hrs"],

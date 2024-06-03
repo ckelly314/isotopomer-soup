@@ -48,18 +48,12 @@ def genmontecarlo(bgc, iters):
     # create nxm array of ones to multiply by means
     arr = np.ones((iters, len(means)))
     # create nxm array of mean model params to add variability on top of
-    arr = (
-        arr * means
-    )
+    arr = arr * means
 
     # create nxm array of random values sampled between 0 and 1
-    randvals = rand(
-        iters, len(means)
-    )
+    randvals = rand(iters, len(means))
 
     # create nxm array of mean values + variability
-    output = arr + randvals * (
-        maxs - mins
-    )
+    output = arr + randvals * (maxs - mins)
 
     return output
