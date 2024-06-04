@@ -1,6 +1,6 @@
 # isotopomer-soup
 
-[![DOI](https://zenodo.org/badge/370495607.svg)](https://zenodo.org/badge/latestdoi/370495607)
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.7810026.svg)](https://zenodo.org/badge/DOI/10.5281/zenodo.7810026.svg)
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
 [![Code style: black](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/psf/black)
 
@@ -20,7 +20,7 @@ Welcome to isotopomer-soup! isotopomer-soup is a model designed to solve for N2O
             - [model submodule](#model-submodule)
             - [montecarlo submodule](#montecarlo-submodule)
             - [optimization submodule](#optimization-submodule)
-            - [postprocessing submodule](#model-submodule)
+            - [postprocessing submodule](#postprocessing-submodule)
             - [preprocessing submodule](#preprocessing-submodule)
             - [runscripts submodule](#runscripts-submodule)
     - [Getting Started](#getting-started)
@@ -32,7 +32,7 @@ Welcome to isotopomer-soup! isotopomer-soup is a model designed to solve for N2O
 
 A paper describing this model is freely available:
 
-> \textbf{C. L. Kelly}, N. M. Travis, P. A. Baya, C. Frey, X. Sun, B. B. Ward, \& K. L. Casciotti (2024).  Isotopomer Labeling in Hybrid Nitrous Oxide Production.  *Biogeosciences* preprint.[doi:10.5194/egusphere-2023-2642](https://doi.org/10.5194/egusphere-2023-2642).
+> C. L. Kelly, N. M. Travis, P. A. Baya, C. Frey, X. Sun, B. B. Ward, \& K. L. Casciotti (2024).  Isotopomer Labeling in Hybrid Nitrous Oxide Production.  *Biogeosciences* preprint. [doi:10.5194/egusphere-2023-2642](https://doi.org/10.5194/egusphere-2023-2642).
 
 
 ## Files and Directories
@@ -111,8 +111,8 @@ To run the model, follow these steps:
 
 1. Clone the repository:
 ```bash
-git clone https://github.com/yourusername/my_python_package.git
-cd my_python_package
+git clone https://github.com/ckelly314/isotopomer-soup.git
+cd isotopomer-soup
 ```
 
 2. Install the dependencies:
@@ -129,4 +129,4 @@ scripts.runmodelv5("PS3", "SCM")
 ## License
 This project is licensed under the MIT License - see the LICENSE file for details.
 
-Thank you for using isotopomer-soup! If you have any questions or issues, feel free to open an issue or contact the maintainers.
+Thank you for using isotopomer-soup! If you have any questions or issues, feel free to open an issue or contact me.
