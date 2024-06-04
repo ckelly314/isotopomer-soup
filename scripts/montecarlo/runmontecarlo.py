@@ -9,9 +9,7 @@ for each iteration.
 import pandas as pd
 import numpy as np
 import time  # for calculating execution time
-from scipy.optimize import (
-    minimize,
-)  # use for nelder-mead optimization of a convex function
+from scipy.optimize import minimize
 from joblib import Parallel, delayed  # parallel processing for multiple simulations
 
 from .genmontecarlo import genmontecarlo

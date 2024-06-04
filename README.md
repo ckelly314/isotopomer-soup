@@ -6,65 +6,34 @@
 
 Welcome to isotopomer-soup! isotopomer-soup is a model designed to solve for N2O production rates from 15N label experiments. Below is an overview of the directory structure and descriptions of each script.
 
-## Directory Structure
+<!-- TOC -->
 
-isotopomer-soup/
-├── LICENSE
-├── model.py
-├── montecarlo.py
-├── montecarlo.sh
-├── PS1Interface.py
-├── PS1Interface.sh
-├── README.md
-├── requirements.txt
-├── runerrors.py
-├── runerrors.sh
-├── figures/
-│   ├── modelv4errors/
-│   ├── modelv5/
-│   ├── modelv5errors/
-├── scripts/
-│   ├── __init__.py
-│   ├── Data/
-│   ├── functions/
-│   │   ├── binomial_stoichiometry.py
-│   │   ├── binomial.py
-│   │   ├── convert_af.py
-│   │   ├── convert_delta.py
-│   ├── initialization/
-│   │   ├── bgc.py
-│   │   ├── initialize_n2o.py
-│   │   ├── initialize.py
-│   │   ├── isotope_effects.py
-│   │   ├── metadata.py
-│   │   ├── modelparams.py
-│   │   ├── tracers.py
-│   ├── model/
-│   │   ├── modelv1.py
-│   │   ├── modelv2.py
-│   │   ├── modelv3.py
-│   │   ├── modelv4.py
-│   │   ├── modelv5.py
-│   ├── montecarlo/
-│   │   ├── genmontecarlo.py
-│   │   ├── runmontecarlo.py
-│   ├── optimization/
-│   │   ├── costfxn.py
-│   │   ├── initialguess_modelv1.py
-│   │   ├── initialguess.py
-│   │   ├── modelv5objective.py
-│   ├── postprocessing
-│   │   ├── plotmodeloutput.py
-│   │   ├── plotmodeloutput2.py
-│   │   ├── postprocess.py
-│   ├── preprocessing
-│   │   ├── read_data.py
-│   └── runscripts/
-│       ├── datapath.py
-│       ├── errors.py
-│       ├── run.py
-│       ├── runmodelv5.py
-└── sherlock_output/
+- [isotopomer-soup](#isotopomer-soup)
+    - [Citation](#citation)
+    - [Files and Directories](#files-and-directories)
+        - [Root Directory](#root-directory)
+        - [figures/](#figures)
+        - [sherlock_output/](#sherlock_output)
+        - [scripts/](#scripts)
+            - [functions submodule](#functions-submodule)
+            - [initialization submodule](#initialization-submodule)
+            - [model submodule](#model-submodule)
+            - [montecarlo submodule](#montecarlo-submodule)
+            - [optimization submodule](#optimization-submodule)
+            - [postprocessing submodule](#model-submodule)
+            - [preprocessing submodule](#preprocessing-submodule)
+            - [runscripts submodule](#runscripts-submodule)
+    - [Getting Started](#getting-started)
+    - [License](#license)
+
+<!-- /TOC -->
+
+## Citation
+
+A paper describing this model is freely available:
+
+> \textbf{C. L. Kelly}, N. M. Travis, P. A. Baya, C. Frey, X. Sun, B. B. Ward, \& K. L. Casciotti (2024).  Isotopomer Labeling in Hybrid Nitrous Oxide Production.  *Biogeosciences* preprint.[doi:10.5194/egusphere-2023-2642](https://doi.org/10.5194/egusphere-2023-2642).
+
 
 ## Files and Directories
 
@@ -138,7 +107,7 @@ This is the main package directory containing all the core code and submodules.
 * runmodelv5: run one instance of a modelv5 optimization
 
 ## Getting Started
-To get started with using this package, follow these steps:
+To run the model, follow these steps:
 
 1. Clone the repository:
 ```bash
