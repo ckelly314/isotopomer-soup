@@ -1,7 +1,6 @@
 # isotopomer-soup
 
-[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.7810026.svg)](https://doi.org/10.5281/zenodo.7810026)
-https://zenodo.org/badge/DOI/10.5281/zenodo.7810026.svg
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.11475416.svg)](https://doi.org/10.5281/zenodo.11475416)
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
 [![Code style: black](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/psf/black)
 
